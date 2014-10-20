@@ -1,0 +1,459 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		026163B519F1C1D00036546D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026163B419F1C1D00036546D /* AppDelegate.swift */; };
+		026163BA19F1C1D00036546D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 026163B819F1C1D00036546D /* Main.storyboard */; };
+		026163BC19F1C1D00036546D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 026163BB19F1C1D00036546D /* Images.xcassets */; };
+		026163BF19F1C1D00036546D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 026163BD19F1C1D00036546D /* LaunchScreen.xib */; };
+		026163CB19F1C1D00036546D /* KWStepperDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026163CA19F1C1D00036546D /* KWStepperDemoTests.swift */; };
+		026163D619F1C3980036546D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026163D519F1C3980036546D /* ViewController.swift */; };
+		026163DB19F1C7F00036546D /* KWStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026163DA19F1C7F00036546D /* KWStepper.swift */; };
+		026163EA19F332DF0036546D /* CountLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026163E819F332DF0036546D /* CountLabel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		026163C519F1C1D00036546D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 026163A719F1C1D00036546D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 026163AE19F1C1D00036546D;
+			remoteInfo = KWStepperDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		026163AF19F1C1D00036546D /* KWStepperDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KWStepperDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		026163B319F1C1D00036546D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		026163B419F1C1D00036546D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		026163B919F1C1D00036546D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		026163BB19F1C1D00036546D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		026163BE19F1C1D00036546D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		026163C419F1C1D00036546D /* KWStepperDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KWStepperDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		026163C919F1C1D00036546D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		026163CA19F1C1D00036546D /* KWStepperDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KWStepperDemoTests.swift; sourceTree = "<group>"; };
+		026163D519F1C3980036546D /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		026163DA19F1C7F00036546D /* KWStepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWStepper.swift; sourceTree = "<group>"; };
+		026163E819F332DF0036546D /* CountLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountLabel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		026163AC19F1C1D00036546D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		026163C119F1C1D00036546D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		026163A619F1C1D00036546D = {
+			isa = PBXGroup;
+			children = (
+				026163B119F1C1D00036546D /* KWStepperDemo */,
+				026163C719F1C1D00036546D /* KWStepperDemoTests */,
+				026163B019F1C1D00036546D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		026163B019F1C1D00036546D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				026163AF19F1C1D00036546D /* KWStepperDemo.app */,
+				026163C419F1C1D00036546D /* KWStepperDemoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		026163B119F1C1D00036546D /* KWStepperDemo */ = {
+			isa = PBXGroup;
+			children = (
+				026163BB19F1C1D00036546D /* Images.xcassets */,
+				026163BD19F1C1D00036546D /* LaunchScreen.xib */,
+				026163B819F1C1D00036546D /* Main.storyboard */,
+				026163D919F1C7F00036546D /* KWStepper */,
+				026163D419F1C3980036546D /* Controllers */,
+				026163E719F332DF0036546D /* Views */,
+				026163B219F1C1D00036546D /* Supporting Files */,
+			);
+			path = KWStepperDemo;
+			sourceTree = "<group>";
+		};
+		026163B219F1C1D00036546D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				026163B419F1C1D00036546D /* AppDelegate.swift */,
+				026163B319F1C1D00036546D /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		026163C719F1C1D00036546D /* KWStepperDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				026163CA19F1C1D00036546D /* KWStepperDemoTests.swift */,
+				026163C819F1C1D00036546D /* Supporting Files */,
+			);
+			path = KWStepperDemoTests;
+			sourceTree = "<group>";
+		};
+		026163C819F1C1D00036546D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				026163C919F1C1D00036546D /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		026163D419F1C3980036546D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				026163D519F1C3980036546D /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		026163D919F1C7F00036546D /* KWStepper */ = {
+			isa = PBXGroup;
+			children = (
+				026163DA19F1C7F00036546D /* KWStepper.swift */,
+			);
+			name = KWStepper;
+			path = ../../KWStepper;
+			sourceTree = "<group>";
+		};
+		026163E719F332DF0036546D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				026163E819F332DF0036546D /* CountLabel.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		026163AE19F1C1D00036546D /* KWStepperDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 026163CE19F1C1D00036546D /* Build configuration list for PBXNativeTarget "KWStepperDemo" */;
+			buildPhases = (
+				026163AB19F1C1D00036546D /* Sources */,
+				026163AC19F1C1D00036546D /* Frameworks */,
+				026163AD19F1C1D00036546D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KWStepperDemo;
+			productName = KWStepperDemo;
+			productReference = 026163AF19F1C1D00036546D /* KWStepperDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		026163C319F1C1D00036546D /* KWStepperDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 026163D119F1C1D00036546D /* Build configuration list for PBXNativeTarget "KWStepperDemoTests" */;
+			buildPhases = (
+				026163C019F1C1D00036546D /* Sources */,
+				026163C119F1C1D00036546D /* Frameworks */,
+				026163C219F1C1D00036546D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				026163C619F1C1D00036546D /* PBXTargetDependency */,
+			);
+			name = KWStepperDemoTests;
+			productName = KWStepperDemoTests;
+			productReference = 026163C419F1C1D00036546D /* KWStepperDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		026163A719F1C1D00036546D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Kyle Weiner";
+				TargetAttributes = {
+					026163AE19F1C1D00036546D = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					026163C319F1C1D00036546D = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = 026163AE19F1C1D00036546D;
+					};
+				};
+			};
+			buildConfigurationList = 026163AA19F1C1D00036546D /* Build configuration list for PBXProject "KWStepperDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 026163A619F1C1D00036546D;
+			productRefGroup = 026163B019F1C1D00036546D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				026163AE19F1C1D00036546D /* KWStepperDemo */,
+				026163C319F1C1D00036546D /* KWStepperDemoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		026163AD19F1C1D00036546D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				026163BA19F1C1D00036546D /* Main.storyboard in Resources */,
+				026163BF19F1C1D00036546D /* LaunchScreen.xib in Resources */,
+				026163BC19F1C1D00036546D /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		026163C219F1C1D00036546D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		026163AB19F1C1D00036546D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				026163DB19F1C7F00036546D /* KWStepper.swift in Sources */,
+				026163D619F1C3980036546D /* ViewController.swift in Sources */,
+				026163B519F1C1D00036546D /* AppDelegate.swift in Sources */,
+				026163EA19F332DF0036546D /* CountLabel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		026163C019F1C1D00036546D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				026163CB19F1C1D00036546D /* KWStepperDemoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		026163C619F1C1D00036546D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 026163AE19F1C1D00036546D /* KWStepperDemo */;
+			targetProxy = 026163C519F1C1D00036546D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		026163B819F1C1D00036546D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				026163B919F1C1D00036546D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		026163BD19F1C1D00036546D /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				026163BE19F1C1D00036546D /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		026163CC19F1C1D00036546D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		026163CD19F1C1D00036546D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		026163CF19F1C1D00036546D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = KWStepperDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		026163D019F1C1D00036546D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = KWStepperDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		026163D219F1C1D00036546D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = KWStepperDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KWStepperDemo.app/KWStepperDemo";
+			};
+			name = Debug;
+		};
+		026163D319F1C1D00036546D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = KWStepperDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KWStepperDemo.app/KWStepperDemo";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		026163AA19F1C1D00036546D /* Build configuration list for PBXProject "KWStepperDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				026163CC19F1C1D00036546D /* Debug */,
+				026163CD19F1C1D00036546D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		026163CE19F1C1D00036546D /* Build configuration list for PBXNativeTarget "KWStepperDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				026163CF19F1C1D00036546D /* Debug */,
+				026163D019F1C1D00036546D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		026163D119F1C1D00036546D /* Build configuration list for PBXNativeTarget "KWStepperDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				026163D219F1C1D00036546D /* Debug */,
+				026163D319F1C1D00036546D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 026163A719F1C1D00036546D /* Project object */;
+}
