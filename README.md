@@ -2,6 +2,9 @@
 
 KWStepper is a stepper control written in Swift. Unlike [UIStepper](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIStepper_Class/index.html), KWStepper allows for a fully customized UI and provides optional delegate methods for tailoring the UX.
 
+![KWStepper Screenshot](screenshot_kwstepper.png)
+![KWStepper Screenshot](screenshot_counters•.png)
+
  KWStepper was initially created in Objective-C for [Addo Label's](http://addolabel.com/) [Counters•](https://itunes.apple.com/app/id722416562?mt=8) and is now available in Swift for you to enjoy :)
 
 ## Installation
