@@ -1,5 +1,9 @@
 # KWStepper
 
+[![Version](https://img.shields.io/cocoapods/v/KWStepper.svg?style=flat)](http://cocoapods.org/?q=kwstepper)
+[![License](https://img.shields.io/cocoapods/l/KWStepper.svg?style=flat)](https://raw.githubusercontent.com/kyleweiner/KWStepper/master/LICENSE)
+[![Platform](https://img.shields.io/cocoapods/p/KWStepper.svg?style=flat)](http://cocoapods.org/?q=kwstepper)
+
 KWStepper is a stepper control written in Swift. Unlike [UIStepper](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIStepper_Class/index.html), KWStepper allows for a fully customized UI and provides optional delegate methods for tailoring the UX.
 
 ![KWStepper Screenshot](screenshots.png)
@@ -8,7 +12,7 @@ KWStepper is a stepper control written in Swift. Unlike [UIStepper](https://deve
 
 ## Installation
 
-KWStepper is available on [CocoaPods](http://cocoapods.org). Alternatively, copy the files in the `KWStepper` directory into your project.
+KWStepper is available on [CocoaPods](http://cocoapods.org), but it doesn't yet work per [this issue](https://github.com/CocoaPods/CocoaPods/issues/2226). For now, simply copy the files in the `KWStepper` directory into your project.
 
 ## Usage
 
