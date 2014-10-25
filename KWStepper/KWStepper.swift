@@ -130,8 +130,6 @@ class KWStepper: UIControl {
         }
     }
 
-    // MARK: Optional Variables
-
     var delegate:KWStepperDelegate? = nil
 
     // MARK: Private Variables
@@ -156,7 +154,7 @@ class KWStepper: UIControl {
         fatalError("KWStepper: NSCoding is not supported!")
     }
 
-    // MARK: ADOStepper
+    // MARK: KWStepper
 
     func decrementValue() {
         let decrementedValue: Double = self.value - self.decrementStepValue
