@@ -20,12 +20,12 @@ class KWStepper: UIControl {
     /**
     The decrement button used initialize the control.
     */
-    var decrementButton: UIButton!
+    let decrementButton: UIButton
 
     /**
     The increment button used initialize the control.
     */
-    var incrementButton: UIButton!
+    let incrementButton: UIButton
 
     // MARK: Optional Variables
 
