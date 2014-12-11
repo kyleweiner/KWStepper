@@ -35,7 +35,7 @@ class KWStepper: UIControl {
     var autoRepeat: Bool = true {
         didSet {
             if autoRepeatInterval <= 0 {
-                self.autoRepeat = false
+                autoRepeat = false
             }
         }
     }
@@ -46,8 +46,8 @@ class KWStepper: UIControl {
     var autoRepeatInterval: NSTimeInterval = 0.10 {
         didSet {
             if autoRepeatInterval <= 0 {
-                self.autoRepeatInterval = 0.10;
-                self.autoRepeat = false
+                autoRepeatInterval = 0.10
+                autoRepeat = false
             }
         }
     }
@@ -63,22 +63,22 @@ class KWStepper: UIControl {
     var value: Double = 0 {
         didSet {
             if value > oldValue {
-                if let delegate = self.delegate {
+                if let delegate = delegate {
                     delegate.KWStepperDidIncrement?()
                 }
             } else {
-                if let delegate = self.delegate {
+                if let delegate = delegate {
                     delegate.KWStepperDidDecrement?()
                 }
             }
 
-            if value < self.minimumValue {
-                self.value = self.minimumValue
-            } else if value > self.maximumValue {
-                self.value = self.maximumValue
+            if value < minimumValue {
+                value = minimumValue
+            } else if value > maximumValue {
+                value = maximumValue
             }
-            
-            self.sendActionsForControlEvents(.ValueChanged)
+
+            sendActionsForControlEvents(.ValueChanged)
         }
     }
 
@@ -87,7 +87,7 @@ class KWStepper: UIControl {
     */
     var minimumValue: Double = 0 {
         willSet {
-            if newValue >= self.maximumValue {
+            if newValue >= maximumValue {
                 let reason = "KWStepper: minimumValue must be less than maximumValue."
                 NSException(name: NSInvalidArgumentException, reason: reason, userInfo: nil).raise()
             }
@@ -99,7 +99,7 @@ class KWStepper: UIControl {
     */
     var maximumValue: Double = 100 {
         willSet {
-            if newValue <= self.minimumValue {
+            if newValue <= minimumValue {
                 let reason = "KWStepper: maximumValue must be greater than minimumValue."
                 NSException(name: NSInvalidArgumentException, reason: reason, userInfo: nil).raise()
             }
@@ -157,36 +157,36 @@ class KWStepper: UIControl {
     // MARK: KWStepper
 
     func decrementValue() {
-        let decrementedValue: Double = self.value - self.decrementStepValue
+        let decrementedValue: Double = value - decrementStepValue
 
-        if self.wraps && decrementedValue < self.minimumValue {
-            self.value = self.maximumValue
+        if wraps && decrementedValue < minimumValue {
+            value = maximumValue
             return
         }
 
-        if decrementedValue >= self.minimumValue {
-            self.value = decrementedValue
+        if decrementedValue >= minimumValue {
+            value = decrementedValue
         } else {
             endLongPress()
-            if let delegate = self.delegate {
+            if let delegate = delegate {
                 delegate.KWStepperMinValueClamped?()
             }
         }
     }
 
     func incrementValue() {
-        let incrementedValue = self.value + self.incrementStepValue;
+        let incrementedValue = value + incrementStepValue
         
-        if self.wraps && incrementedValue > self.maximumValue {
-            self.value = self.minimumValue
+        if wraps && incrementedValue > maximumValue {
+            value = minimumValue
             return
         }
 
-        if (incrementedValue <= self.maximumValue) {
-            self.value = incrementedValue;
+        if (incrementedValue <= maximumValue) {
+            value = incrementedValue
         } else {
             endLongPress()
-            if let delegate = self.delegate {
+            if let delegate = delegate {
                 delegate.KWStepperMaxValueClamped?()
             }
         }
@@ -195,15 +195,15 @@ class KWStepper: UIControl {
     // MARK: User Interaction
 
     func didLongPress(sender: UIGestureRecognizer) {
-        if !self.autoRepeat {
+        if !autoRepeat {
             return
         }
 
-        if self.longPressTimer == nil && sender.state == .Began {
-            let selector = sender.view == self.incrementButton ? Selector("incrementValue") : Selector("decrementValue")
+        if longPressTimer == nil && sender.state == .Began {
+            let selector = sender.view == incrementButton ? Selector("incrementValue") : Selector("decrementValue")
 
-            self.longPressTimer = NSTimer.scheduledTimerWithTimeInterval(
-                self.autoRepeatInterval,
+            longPressTimer = NSTimer.scheduledTimerWithTimeInterval(
+                autoRepeatInterval,
                 target: self,
                 selector: selector,
                 userInfo: nil,
@@ -217,9 +217,9 @@ class KWStepper: UIControl {
     }
     
     private func endLongPress() {
-        if self.longPressTimer != nil {
-            self.longPressTimer?.invalidate()
-            self.longPressTimer = nil
+        if longPressTimer != nil {
+            longPressTimer?.invalidate()
+            longPressTimer = nil
         }
     }
 

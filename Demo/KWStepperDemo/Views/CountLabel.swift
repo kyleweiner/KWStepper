@@ -11,7 +11,7 @@ import UIKit
 class CountLabel: UILabel {
 
     override func awakeFromNib() {
-        let descriptor = self.font.fontDescriptor().fontDescriptorByAddingAttributes([
+        let descriptor = font.fontDescriptor().fontDescriptorByAddingAttributes([
             UIFontDescriptorFeatureSettingsAttribute: [
                 [
                     UIFontFeatureTypeIdentifierKey: kNumberSpacingType,
@@ -23,7 +23,7 @@ class CountLabel: UILabel {
                 ]
             ]
         ])
-        self.font = UIFont(descriptor: descriptor, size: 0.0)
+        font = UIFont(descriptor: descriptor, size: 0.0)
     }
     
 }

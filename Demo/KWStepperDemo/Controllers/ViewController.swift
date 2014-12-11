@@ -27,11 +27,11 @@ class ViewController: UIViewController, KWStepperDelegate {
     // MARK: Configuration
 
     func configureStepper() {
-        self.stepper = KWStepper(
-            decrementButton: self.decrementButton,
-            incrementButton: self.incrementButton)
+        stepper = KWStepper(
+            decrementButton: decrementButton,
+            incrementButton: incrementButton)
 
-        if let stepper = self.stepper {
+        if let stepper = stepper {
             stepper.addTarget(self,
                 action: Selector("stepperDidChange"),
                 forControlEvents: .ValueChanged)
@@ -50,16 +50,16 @@ class ViewController: UIViewController, KWStepperDelegate {
     }
     
     func configureSwitches() {
-        if let stepper = self.stepper {
-            self.wrapsSwitch.on = stepper.wraps
-            self.autoRepeatSwitch.on = stepper.autoRepeat
+        if let stepper = stepper {
+            wrapsSwitch.on = stepper.wraps
+            autoRepeatSwitch.on = stepper.autoRepeat
         }
 
-        self.wrapsSwitch.addTarget(self,
+        wrapsSwitch.addTarget(self,
             action: Selector("switchDidChange:"),
             forControlEvents: .ValueChanged)
 
-        self.autoRepeatSwitch.addTarget(self,
+        autoRepeatSwitch.addTarget(self,
             action: Selector("switchDidChange:"),
             forControlEvents: .ValueChanged)
     }
@@ -67,13 +67,12 @@ class ViewController: UIViewController, KWStepperDelegate {
     // MARK: KWStepper Events
 
     func stepperDidChange() {
-        self.countLabel.text = NSString(format: "%.f", self.stepper!.value)
+        countLabel.text = NSString(format: "%.f", stepper!.value)
     }
 
     func stepperDidClampValue() {
-        let stepper = self.stepper!
-        let minValue = NSString(format: "%.f", stepper.minimumValue)
-        let maxValue = NSString(format: "%.f", stepper.maximumValue)
+        let minValue = NSString(format: "%.f", stepper!.minimumValue)
+        let maxValue = NSString(format: "%.f", stepper!.maximumValue)
 
         UIAlertView(
             title: "Stepper Limit Reached",
@@ -106,13 +105,13 @@ class ViewController: UIViewController, KWStepperDelegate {
     // MARK: UISwitch Events
 
     func switchDidChange(sender: UISwitch) {
-        if let stepper = self.stepper {
-            if (sender === self.wrapsSwitch) {
-                stepper.wraps = self.wrapsSwitch.on
+        if let stepper = stepper {
+            if (sender === wrapsSwitch) {
+                stepper.wraps = wrapsSwitch.on
             }
             
-            if (sender === self.autoRepeatSwitch) {
-                stepper.autoRepeat = self.autoRepeatSwitch.on
+            if (sender === autoRepeatSwitch) {
+                stepper.autoRepeat = autoRepeatSwitch.on
             }
         }
     }
