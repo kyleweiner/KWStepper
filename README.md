@@ -19,7 +19,7 @@ KWStepper is available on [CocoaPods](http://cocoapods.org), but it doesn't yet 
 Try the demo!
 
 ```swift
-var stepper: KWStepper?
+var stepper: KWStepper!
 
 @IBOutlet weak var countLabel: UILabel!
 @IBOutlet weak var decrementButton: UIButton!
@@ -27,20 +27,18 @@ var stepper: KWStepper?
 ```
 
 ```swift
-self.stepper = KWStepper(
-    decrementButton: self.decrementButton,
-    incrementButton: self.incrementButton)
+stepper = KWStepper(
+    decrementButton: decrementButton,
+    incrementButton: incrementButton)
 
-if let stepper = self.stepper {
-    stepper.addTarget(self,
-        action: Selector("stepperDidChange"),
-        forControlEvents: .ValueChanged)
-}
+stepper.addTarget(self,
+    action: "stepperDidChange",
+    forControlEvents: .ValueChanged)
 ```
 
 ```swift
 func stepperDidChange() {
-    self.countLabel.text = NSString(format: "%.f", self.stepper!.value)
+    countLabel.text = NSString(format: "%.f", stepper.value)
 }
 ```
 
