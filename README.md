@@ -4,15 +4,21 @@
 [![License](https://img.shields.io/cocoapods/l/KWStepper.svg?style=flat)](https://raw.githubusercontent.com/kyleweiner/KWStepper/master/LICENSE)
 [![Platform](https://img.shields.io/cocoapods/p/KWStepper.svg?style=flat)](http://cocoapods.org/?q=kwstepper)
 
-KWStepper is a stepper control written in Swift. Unlike [UIStepper](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIStepper_Class/index.html), KWStepper allows for a fully customized UI and provides optional delegate methods for tailoring the UX.
+KWStepper is a stepper control written in Swift. Unlike [UIStepper](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIStepper_Class/index.html), KWStepper allows for a fully customized UI and provides callbacks for tailoring the UX.
 
 ![KWStepper Screenshot](screenshots.png)
 
  KWStepper was initially created in Objective-C for [Addo Label's](http://addolabel.com/) [Counters•](https://itunes.apple.com/app/id722416562?mt=8) and is now available in Swift for you to enjoy :)
 
+## Features
+
+* Allows for a fully customized UI.
+* Provides properties for setting different decrement and increment steps.
+* Offers optional callbacks for responding to control events and tailoring the UX.
+
 ## Installation
 
-KWStepper is available on [CocoaPods](http://cocoapods.org), but it doesn't yet work per [this issue](https://github.com/CocoaPods/CocoaPods/issues/2226). For now, simply copy the files in the `KWStepper` directory into your project.
+Simply copy the files in the `KWStepper` directory into your project.
 
 ## Usage
 
@@ -30,7 +36,19 @@ var stepper: KWStepper!
 stepper = KWStepper(
     decrementButton: decrementButton,
     incrementButton: incrementButton)
+```
 
+Respond to control events using the `valueChangedCallback` property.
+
+```swift
+stepper.valueChangedCallback = {
+    self.countLabel.text = NSString(format: "%.f", self.stepper.value)
+}
+```
+
+Or, use the target-action pattern.
+
+```swift
 stepper.addTarget(self,
     action: "stepperDidChange",
     forControlEvents: .ValueChanged)
@@ -42,13 +60,20 @@ func stepperDidChange() {
 }
 ```
 
-### Properties
+### Configuring KWStepper
 
-The properties of KWStepper are identical to [UIStepper](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIStepper_Class/index.html) with the following exceptions:
+With the exception of the `continuous` property, KWStepper offers everything provided by [UIStepper](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIStepper_Class/index.html) and more.
 
-* Instead of a single `stepValue` property, KWStepper provides `decrementStepValue` and `incrementStepValue` properties for setting different decrement and increment steps.
-* There is a `delegate` property that should be set when adhering to the [`KWStepperDelegate`](#kwstepperdelegate) protocol.
-* During user interaction, change events are sent immediately when the value changes–there is no `continuous` property. 
+```swift
+stepper.autoRepeat = true
+stepper.autoRepeatInterval = 0.10
+stepper.wraps = true
+stepper.minimumValue = 0
+stepper.maximumValue = 8
+stepper.value = 0
+stepper.incrementStepValue = 1
+stepper.decrementStepValue = 1
+```
 
 ### KWStepperDelegate
 
@@ -62,6 +87,18 @@ Adopting `KWStepperDelegate` provides the following optional delegate methods fo
 In the demo, `KWStepperMaxValueClamped()` and `KWStepperMinValueClamped()` are used to show a `UIAlertView` when a limit is reached and the `wraps` property is set to `false`.
 
 In [Counters•](https://itunes.apple.com/app/id722416562?mt=8), `KWStepperDidDecrement()` and `KWStepperDidIncrement()` are used to play different sounds when decrementing and incrementing the steppers.
+
+### Callbacks
+
+As an alternative to the `KWStepperDelegate` protocol, KWStepper provides the following callbacks:
+
+* `valueChangedCallback`
+* `decrementCallback`
+* `incrementCallback`
+* `maxValueClampedCallback`
+* `minValueClampedCallback`
+
+
 
 ## Author
 

@@ -66,9 +66,17 @@ class KWStepper: UIControl {
                 if let delegate = delegate {
                     delegate.KWStepperDidIncrement?()
                 }
+                
+                if let callback = incrementCallback {
+                    callback()
+                }
             } else {
                 if let delegate = delegate {
                     delegate.KWStepperDidDecrement?()
+                }
+                
+                if let callback = decrementCallback {
+                    callback()
                 }
             }
 
@@ -79,6 +87,10 @@ class KWStepper: UIControl {
             }
 
             sendActionsForControlEvents(.ValueChanged)
+            
+            if let callback = valueChangedCallback {
+                callback()
+            }
         }
     }
 
@@ -130,6 +142,31 @@ class KWStepper: UIControl {
         }
     }
 
+    /**
+    Executed when the value is changed.
+    */
+    var valueChangedCallback: (() -> ())?
+
+    /**
+    Executed when the value is decremented.
+    */
+    var decrementCallback: (() -> ())?
+
+    /**
+    Executed when the value is incremented.
+    */
+    var incrementCallback: (() -> ())?
+
+    /**
+    Executed when the max value is clamped.
+    */
+    var maxValueClampedCallback: (() -> ())?
+
+    /**
+    Executed when the min value is clamped.
+    */
+    var minValueClampedCallback: (() -> ())?
+
     var delegate:KWStepperDelegate? = nil
 
     // MARK: Private Variables
@@ -171,6 +208,10 @@ class KWStepper: UIControl {
             if let delegate = delegate {
                 delegate.KWStepperMinValueClamped?()
             }
+            
+            if let callack = minValueClampedCallback {
+                callack()
+            }
         }
     }
 
@@ -188,6 +229,10 @@ class KWStepper: UIControl {
             endLongPress()
             if let delegate = delegate {
                 delegate.KWStepperMaxValueClamped?()
+            }
+            
+            if let callback = maxValueClampedCallback {
+                callback()
             }
         }
     }

@@ -31,10 +31,6 @@ class ViewController: UIViewController, KWStepperDelegate {
             decrementButton: decrementButton,
             incrementButton: incrementButton)
 
-        stepper.addTarget(self,
-            action: "stepperDidChange",
-            forControlEvents: .ValueChanged)
-
         stepper.autoRepeat = true
         stepper.autoRepeatInterval = 0.10
         stepper.wraps = true
@@ -45,8 +41,20 @@ class ViewController: UIViewController, KWStepperDelegate {
         stepper.decrementStepValue = 1
 
         stepper.delegate = self
+        
+        stepper.valueChangedCallback = {
+            self.countLabel.text = NSString(format: "%.f", self.stepper.value)
+        }
+
+        stepper.decrementCallback = {
+            println("decrementCallback: The stepper did decrement")
+        }
+
+        stepper.incrementCallback = {
+            println("incrementCallback: The stepper did increment")
+        }
     }
-    
+
     func configureSwitches() {
         wrapsSwitch.on = stepper.wraps
         autoRepeatSwitch.on = stepper.autoRepeat
@@ -60,16 +68,28 @@ class ViewController: UIViewController, KWStepperDelegate {
             forControlEvents: .ValueChanged)
     }
 
-    // MARK: KWStepper Events
-
-    func stepperDidChange() {
-        countLabel.text = NSString(format: "%.f", stepper.value)
+    // MARK: KWStepperDelegate
+    
+    func KWStepperDidDecrement() {
+    }
+    
+    func KWStepperDidIncrement() {
+    }
+    
+    func KWStepperMaxValueClamped() {
+        println("KWStepperDelegate: Max value clamped")
+        stepperDidClampValue()
+    }
+    
+    func KWStepperMinValueClamped() {
+        println("KWStepperDelegate: Min value clamped")
+        stepperDidClampValue()
     }
 
     func stepperDidClampValue() {
         let minValue = NSString(format: "%.f", stepper.minimumValue)
         let maxValue = NSString(format: "%.f", stepper.maximumValue)
-
+        
         UIAlertView(
             title: "Stepper Limit Reached",
             message: "The step value was clamped, as it must be between \(minValue) and \(maxValue).",
@@ -78,26 +98,6 @@ class ViewController: UIViewController, KWStepperDelegate {
         ).show()
     }
 
-    // MARK: KWStepperDelegate Methods
-    
-    func KWStepperDidDecrement() {
-        println("The stepper did decrement")
-    }
-
-    func KWStepperDidIncrement() {
-        println("The stepper did increment")
-    }
-
-    func KWStepperMaxValueClamped() {
-        println("Max value clamped")
-        stepperDidClampValue()
-    }
-    
-    func KWStepperMinValueClamped() {
-        println("Min value clamped")
-        stepperDidClampValue()
-    }
-    
     // MARK: UISwitch Events
 
     func switchDidChange(sender: UISwitch) {
