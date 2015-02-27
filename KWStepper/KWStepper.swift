@@ -63,21 +63,11 @@ class KWStepper: UIControl {
     var value: Double = 0 {
         didSet {
             if value > oldValue {
-                if let delegate = delegate {
-                    delegate.KWStepperDidIncrement?()
-                }
-                
-                if let callback = incrementCallback {
-                    callback()
-                }
+                delegate?.KWStepperDidIncrement?()
+                incrementCallback?()
             } else {
-                if let delegate = delegate {
-                    delegate.KWStepperDidDecrement?()
-                }
-                
-                if let callback = decrementCallback {
-                    callback()
-                }
+                delegate?.KWStepperDidDecrement?()
+                decrementCallback?()
             }
 
             if value < minimumValue {
@@ -87,10 +77,7 @@ class KWStepper: UIControl {
             }
 
             sendActionsForControlEvents(.ValueChanged)
-            
-            if let callback = valueChangedCallback {
-                callback()
-            }
+            valueChangedCallback?()
         }
     }
 
@@ -167,7 +154,7 @@ class KWStepper: UIControl {
     */
     var minValueClampedCallback: (() -> ())?
 
-    var delegate:KWStepperDelegate? = nil
+    var delegate: KWStepperDelegate? = nil
 
     // MARK: Private Variables
     
@@ -205,13 +192,8 @@ class KWStepper: UIControl {
             value = decrementedValue
         } else {
             endLongPress()
-            if let delegate = delegate {
-                delegate.KWStepperMinValueClamped?()
-            }
-            
-            if let callack = minValueClampedCallback {
-                callack()
-            }
+            delegate?.KWStepperMinValueClamped?()
+            maxValueClampedCallback?()
         }
     }
 
@@ -223,17 +205,12 @@ class KWStepper: UIControl {
             return
         }
 
-        if (incrementedValue <= maximumValue) {
+        if incrementedValue <= maximumValue {
             value = incrementedValue
         } else {
             endLongPress()
-            if let delegate = delegate {
-                delegate.KWStepperMaxValueClamped?()
-            }
-            
-            if let callback = maxValueClampedCallback {
-                callback()
-            }
+            delegate?.KWStepperMaxValueClamped?()
+            maxValueClampedCallback?()
         }
     }
 
