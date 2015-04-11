@@ -43,7 +43,7 @@ class ViewController: UIViewController, KWStepperDelegate {
         stepper.delegate = self
         
         stepper.valueChangedCallback = {
-            self.countLabel.text = NSString(format: "%.f", self.stepper.value)
+            self.countLabel.text = String(format: "%.f", self.stepper.value)
         }
 
         stepper.decrementCallback = {
