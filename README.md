@@ -16,6 +16,13 @@ KWStepper is a stepper control written in Swift. Unlike [UIStepper](https://deve
 * Provides properties for setting different decrement and increment steps.
 * Offers optional callbacks for responding to control events and tailoring the UX.
 
+## Requirements
+
+* iOS >= 9.0
+* Xcode >= 7.0
+
+The latest release of KWStepper uses Swift 2.0. If your project uses an earlier version of Swift, try a [previous release](https://github.com/kyleweiner/KWStepper/releases).
+
 ## Installation
 
 Simply copy the files in the `KWStepper` directory into your project.
@@ -97,8 +104,6 @@ As an alternative to the `KWStepperDelegate` protocol, KWStepper provides the fo
 * `incrementCallback`
 * `maxValueClampedCallback`
 * `minValueClampedCallback`
-
-
 
 ## Author
 
