@@ -167,11 +167,11 @@ class KWStepper: UIControl {
         self.incrementButton = incrementButton
         super.init(frame: CGRectZero)
 
-        self.decrementButton.addTarget(self, action: Selector("decrementValue"), forControlEvents: UIControlEvents.TouchUpInside)
-        self.incrementButton.addTarget(self, action: Selector("incrementValue"), forControlEvents: UIControlEvents.TouchUpInside)
+        self.decrementButton.addTarget(self, action: "decrementValue", forControlEvents: .TouchUpInside)
+        self.incrementButton.addTarget(self, action: "incrementValue", forControlEvents: .TouchUpInside)
 
-        self.decrementButton.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: Selector("didLongPress:")))
-        self.incrementButton.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: Selector("didLongPress:")))
+        self.decrementButton.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: "didLongPress:"))
+        self.incrementButton.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: "didLongPress:"))
     }
 
     required init(coder: NSCoder) {
@@ -181,16 +181,12 @@ class KWStepper: UIControl {
     // MARK: KWStepper
 
     func decrementValue() {
-        let decrementedValue: Double = value - decrementStepValue
-
-        if wraps && decrementedValue < minimumValue {
+        switch value - decrementStepValue {
+        case let x where wraps && x < minimumValue:
             value = maximumValue
-            return
-        }
-
-        if decrementedValue >= minimumValue {
-            value = decrementedValue
-        } else {
+        case let x where x >= minimumValue:
+            value = x
+        default:
             endLongPress()
             delegate?.KWStepperMinValueClamped?()
             maxValueClampedCallback?()
@@ -198,16 +194,12 @@ class KWStepper: UIControl {
     }
 
     func incrementValue() {
-        let incrementedValue = value + incrementStepValue
-        
-        if wraps && incrementedValue > maximumValue {
+        switch value + incrementStepValue {
+        case let x where wraps && x > maximumValue:
             value = minimumValue
-            return
-        }
-
-        if incrementedValue <= maximumValue {
-            value = incrementedValue
-        } else {
+        case let x where x <= maximumValue:
+            value = x
+        default:
             endLongPress()
             delegate?.KWStepperMaxValueClamped?()
             maxValueClampedCallback?()
@@ -217,7 +209,7 @@ class KWStepper: UIControl {
     // MARK: User Interaction
 
     func didLongPress(sender: UIGestureRecognizer) {
-        if !autoRepeat {
+        guard autoRepeat else {
             return
         }
 

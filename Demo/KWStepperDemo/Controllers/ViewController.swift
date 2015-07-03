@@ -3,7 +3,6 @@
 //  KWStepperDemo
 //
 //  Created by Kyle Weiner on 10/17/14.
-//  Copyright (c) 2014 Kyle Weiner. All rights reserved.
 //
 
 import UIKit
@@ -24,13 +23,15 @@ class ViewController: UIViewController, KWStepperDelegate {
         configureSwitches()
     }
 
-    // MARK: Configuration
+    // MARK: - Configuration
 
     func configureStepper() {
+        // https://github.com/kyleweiner/KWStepper#usage
         stepper = KWStepper(
             decrementButton: decrementButton,
             incrementButton: incrementButton)
 
+        // https://github.com/kyleweiner/KWStepper#configuring-kwstepper
         stepper.autoRepeat = true
         stepper.autoRepeatInterval = 0.10
         stepper.wraps = true
@@ -40,18 +41,22 @@ class ViewController: UIViewController, KWStepperDelegate {
         stepper.incrementStepValue = 1
         stepper.decrementStepValue = 1
 
+        // Adopting KWStepperDelegate provides optional methods for tailoring the UX.
+        // https://github.com/kyleweiner/KWStepper#kwstepperdelegate
         stepper.delegate = self
-        
+
+        // Callbacks (closures) offer an alternative to the KWStepperDelegate protocol.
+        // https://github.com/kyleweiner/KWStepper#callbacks
         stepper.valueChangedCallback = {
             self.countLabel.text = String(format: "%.f", self.stepper.value)
         }
 
         stepper.decrementCallback = {
-            println("decrementCallback: The stepper did decrement")
+            print("decrementCallback: The stepper did decrement")
         }
 
         stepper.incrementCallback = {
-            println("incrementCallback: The stepper did increment")
+            print("incrementCallback: The stepper did increment")
         }
     }
 
@@ -68,8 +73,9 @@ class ViewController: UIViewController, KWStepperDelegate {
             forControlEvents: .ValueChanged)
     }
 
-    // MARK: KWStepperDelegate
-    
+    // MARK: - KWStepperDelegate
+    // https://github.com/kyleweiner/KWStepper#kwstepperdelegate
+
     func KWStepperDidDecrement() {
     }
     
@@ -77,12 +83,12 @@ class ViewController: UIViewController, KWStepperDelegate {
     }
     
     func KWStepperMaxValueClamped() {
-        println("KWStepperDelegate: Max value clamped")
+        print("KWStepperDelegate: Max value clamped")
         stepperDidClampValue()
     }
     
     func KWStepperMinValueClamped() {
-        println("KWStepperDelegate: Min value clamped")
+        print("KWStepperDelegate: Min value clamped")
         stepperDidClampValue()
     }
 
@@ -98,7 +104,7 @@ class ViewController: UIViewController, KWStepperDelegate {
         ).show()
     }
 
-    // MARK: UISwitch Events
+    // MARK: - UISwitch Events
 
     func switchDidChange(sender: UISwitch) {
         if (sender === wrapsSwitch) {
