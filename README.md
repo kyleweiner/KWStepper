@@ -37,7 +37,7 @@ If you prefer not to use a dependency manager, simply copy the `Source/KWStepper
 
 ## Usage
 
-Try the demo!
+Try the example project!
 
 ```swift
 var stepper: KWStepper!
@@ -99,7 +99,7 @@ Adopting `KWStepperDelegate` provides the following optional delegate methods fo
 * `optional func KWStepperMaxValueClamped()`
 * `optional func KWStepperMinValueClamped()`
 
-In the demo, `KWStepperMaxValueClamped()` and `KWStepperMinValueClamped()` are used to show a `UIAlertView` when a limit is reached and the `wraps` property is set to `false`.
+In the example project, `KWStepperMaxValueClamped()` and `KWStepperMinValueClamped()` are used to show a `UIAlertView` when a limit is reached and the `wraps` property is set to `false`.
 
 In [Counters•](https://itunes.apple.com/app/id722416562?mt=8), `KWStepperDidDecrement()` and `KWStepperDidIncrement()` are used to play different sounds when decrementing and incrementing the steppers.
 
