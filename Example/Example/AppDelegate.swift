@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  KWStepperDemo
+//  Example
 //
-//  Created by Kyle Weiner on 10/17/14.
-//  Copyright (c) 2014 Kyle Weiner. All rights reserved.
+//  Created by Kyle Weiner on 7/11/15.
+//  Copyright (c) 2015 Kyle Weiner. All rights reserved.
 //
 
 import UIKit
@@ -16,7 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: false)
         return true
     }
 

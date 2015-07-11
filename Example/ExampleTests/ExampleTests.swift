@@ -1,15 +1,15 @@
 //
-//  KWStepperDemoTests.swift
-//  KWStepperDemoTests
+//  ExampleTests.swift
+//  ExampleTests
 //
-//  Created by Kyle Weiner on 10/17/14.
-//  Copyright (c) 2014 Kyle Weiner. All rights reserved.
+//  Created by Kyle Weiner on 7/11/15.
+//  Copyright (c) 2015 Kyle Weiner. All rights reserved.
 //
 
 import UIKit
 import XCTest
 
-class KWStepperDemoTests: XCTestCase {
+class ExampleTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

@@ -1,11 +1,10 @@
 //
 //  ViewController.swift
-//  KWStepperDemo
-//
 //  Created by Kyle Weiner on 10/17/14.
 //
 
 import UIKit
+import KWStepper
 
 class ViewController: UIViewController, KWStepperDelegate {
 
@@ -52,11 +51,11 @@ class ViewController: UIViewController, KWStepperDelegate {
         }
 
         stepper.decrementCallback = {
-            print("decrementCallback: The stepper did decrement")
+            print("decrementCallback: The stepper did decrement \n")
         }
 
         stepper.incrementCallback = {
-            print("incrementCallback: The stepper did increment")
+            print("incrementCallback: The stepper did increment \n")
         }
     }
 
@@ -78,30 +77,30 @@ class ViewController: UIViewController, KWStepperDelegate {
 
     func KWStepperDidDecrement() {
     }
-    
+
     func KWStepperDidIncrement() {
     }
-    
+
     func KWStepperMaxValueClamped() {
-        print("KWStepperDelegate: Max value clamped")
+        print("KWStepperDelegate: Max value clamped \n")
         stepperDidClampValue()
     }
-    
+
     func KWStepperMinValueClamped() {
-        print("KWStepperDelegate: Min value clamped")
+        print("KWStepperDelegate: Min value clamped \n")
         stepperDidClampValue()
     }
 
     func stepperDidClampValue() {
         let minValue = NSString(format: "%.f", stepper.minimumValue)
         let maxValue = NSString(format: "%.f", stepper.maximumValue)
-        
+
         UIAlertView(
             title: "Stepper Limit Reached",
             message: "The step value was clamped, as it must be between \(minValue) and \(maxValue).",
             delegate: self,
             cancelButtonTitle: "OK"
-        ).show()
+            ).show()
     }
 
     // MARK: - UISwitch Events
@@ -115,6 +114,5 @@ class ViewController: UIViewController, KWStepperDelegate {
             stepper.autoRepeat = autoRepeatSwitch.on
         }
     }
-
+    
 }
-

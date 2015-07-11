@@ -16,16 +16,24 @@ KWStepper is a stepper control written in Swift. Unlike [UIStepper](https://deve
 * Provides properties for setting different decrement and increment steps.
 * Offers optional callbacks for responding to control events and tailoring the UX.
 
-## Requirements
-
-* iOS >= 9.0
-* Xcode >= 7.0
-
-The latest release of KWStepper uses Swift 2.0. If your project uses an earlier version of Swift, try a [previous release](https://github.com/kyleweiner/KWStepper/releases).
-
 ## Installation
 
-Simply copy the files in the `KWStepper` directory into your project.
+### CocoaPods
+
+KWStepper is available through [CocoaPods](http://cocoapods.org). To install
+it, simply add the following lines to your Podfile:
+
+```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+pod 'KWStepper'
+```
+
+### Manually
+
+If you prefer not to use a dependency manager, simply copy the `Source/KWStepper.swift` file into your project.
 
 ## Usage
 

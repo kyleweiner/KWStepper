@@ -6,14 +6,14 @@
 
 import UIKit
 
-@objc protocol KWStepperDelegate {
+@objc public protocol KWStepperDelegate {
     optional func KWStepperDidDecrement()
     optional func KWStepperDidIncrement()
     optional func KWStepperMaxValueClamped()
     optional func KWStepperMinValueClamped()
 }
 
-class KWStepper: UIControl {
+public class KWStepper: UIControl {
 
     // MARK: Required Variables
 
@@ -32,7 +32,7 @@ class KWStepper: UIControl {
     /**
     If true, press & hold repeatedly alters value. Default = true.
     */
-    var autoRepeat: Bool = true {
+    public var autoRepeat: Bool = true {
         didSet {
             if autoRepeatInterval <= 0 {
                 autoRepeat = false
@@ -43,7 +43,7 @@ class KWStepper: UIControl {
     /**
     The interval that autoRepeat changes the stepper value, specified in seconds. Default = 0.10.
     */
-    var autoRepeatInterval: NSTimeInterval = 0.10 {
+    public var autoRepeatInterval: NSTimeInterval = 0.10 {
         didSet {
             if autoRepeatInterval <= 0 {
                 autoRepeatInterval = 0.10
@@ -55,12 +55,12 @@ class KWStepper: UIControl {
     /**
     If YES, value wraps from min <-> max. Default = false.
     */
-    var wraps: Bool = false
-    
+    public var wraps: Bool = false
+
     /**
     Sends UIControlEventValueChanged, clamped to min/max. Default = 0.
     */
-    var value: Double = 0 {
+    public var value: Double = 0 {
         didSet {
             if value > oldValue {
                 delegate?.KWStepperDidIncrement?()
@@ -84,7 +84,7 @@ class KWStepper: UIControl {
     /**
     Must be less than maximumValue. Default = 0.
     */
-    var minimumValue: Double = 0 {
+    public var minimumValue: Double = 0 {
         willSet {
             if newValue >= maximumValue {
                 let reason = "KWStepper: minimumValue must be less than maximumValue."
@@ -96,7 +96,7 @@ class KWStepper: UIControl {
     /**
     Must be less than minimumValue. Default = 100.
     */
-    var maximumValue: Double = 100 {
+    public var maximumValue: Double = 100 {
         willSet {
             if newValue <= minimumValue {
                 let reason = "KWStepper: maximumValue must be greater than minimumValue."
@@ -108,7 +108,7 @@ class KWStepper: UIControl {
     /**
     The value to step when incrementing. Must be greater than 0. Default = 1.
     */
-    var incrementStepValue: Double = 1 {
+    public var incrementStepValue: Double = 1 {
         willSet {
             if newValue <= 0 {
                 let reason = "KWStepper: incrementStepValue must be greater than zero."
@@ -116,11 +116,11 @@ class KWStepper: UIControl {
             }
         }
     }
-    
+
     /**
     The value to step when decrementing. Must be greater than 0. Default = 1.
     */
-    var decrementStepValue: Double = 1 {
+    public var decrementStepValue: Double = 1 {
         willSet {
             if newValue <= 0 {
                 let reason = "KWStepper: decrementStepValue must be greater than zero."
@@ -132,37 +132,37 @@ class KWStepper: UIControl {
     /**
     Executed when the value is changed.
     */
-    var valueChangedCallback: (() -> ())?
+    public var valueChangedCallback: (() -> ())?
 
     /**
     Executed when the value is decremented.
     */
-    var decrementCallback: (() -> ())?
+    public var decrementCallback: (() -> ())?
 
     /**
     Executed when the value is incremented.
     */
-    var incrementCallback: (() -> ())?
+    public var incrementCallback: (() -> ())?
 
     /**
     Executed when the max value is clamped.
     */
-    var maxValueClampedCallback: (() -> ())?
+    public var maxValueClampedCallback: (() -> ())?
 
     /**
     Executed when the min value is clamped.
     */
-    var minValueClampedCallback: (() -> ())?
+    public var minValueClampedCallback: (() -> ())?
 
-    var delegate: KWStepperDelegate? = nil
+    public var delegate: KWStepperDelegate? = nil
 
     // MARK: Private Variables
-    
+
     private var longPressTimer: NSTimer?
 
     // MARK: Initialization
-    
-    init(decrementButton: UIButton, incrementButton: UIButton) {
+
+    public init(decrementButton: UIButton, incrementButton: UIButton) {
         self.decrementButton = decrementButton
         self.incrementButton = incrementButton
         super.init(frame: CGRectZero)
@@ -174,13 +174,13 @@ class KWStepper: UIControl {
         self.incrementButton.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: "didLongPress:"))
     }
 
-    required init(coder: NSCoder) {
+    required public init(coder: NSCoder) {
         fatalError("KWStepper: NSCoding is not supported!")
     }
 
     // MARK: KWStepper
 
-    func decrementValue() {
+    public func decrementValue() {
         switch value - decrementStepValue {
         case let x where wraps && x < minimumValue:
             value = maximumValue
@@ -193,7 +193,7 @@ class KWStepper: UIControl {
         }
     }
 
-    func incrementValue() {
+    public func incrementValue() {
         switch value + incrementStepValue {
         case let x where wraps && x > maximumValue:
             value = minimumValue
@@ -208,8 +208,8 @@ class KWStepper: UIControl {
 
     // MARK: User Interaction
 
-    func didLongPress(sender: UIGestureRecognizer) {
-        guard autoRepeat else {
+    public func didLongPress(sender: UIGestureRecognizer) {
+        if !autoRepeat {
             return
         }
 
@@ -229,12 +229,12 @@ class KWStepper: UIControl {
             endLongPress()
         }
     }
-    
+
     private func endLongPress() {
         if longPressTimer != nil {
             longPressTimer?.invalidate()
             longPressTimer = nil
         }
     }
-
+    
 }
