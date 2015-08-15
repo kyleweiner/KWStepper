@@ -100,17 +100,17 @@ class ViewController: UIViewController, KWStepperDelegate {
             message: "The step value was clamped, as it must be between \(minValue) and \(maxValue).",
             delegate: self,
             cancelButtonTitle: "OK"
-            ).show()
+        ).show()
     }
 
     // MARK: - UISwitch Events
 
     func switchDidChange(sender: UISwitch) {
-        if (sender === wrapsSwitch) {
+        if sender === wrapsSwitch {
             stepper.wraps = wrapsSwitch.on
         }
 
-        if (sender === autoRepeatSwitch) {
+        if sender === autoRepeatSwitch {
             stepper.autoRepeat = autoRepeatSwitch.on
         }
     }

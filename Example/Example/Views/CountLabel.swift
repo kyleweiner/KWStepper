@@ -1,9 +1,6 @@
 //
 //  CountLabel.swift
-//  KWStepperDemo
-//
 //  Created by Kyle Weiner on 10/18/14.
-//  Copyright (c) 2014 Kyle Weiner. All rights reserved.
 //
 
 import UIKit
@@ -11,7 +8,15 @@ import UIKit
 class CountLabel: UILabel {
 
     override func awakeFromNib() {
-        let descriptor = font.fontDescriptor().fontDescriptorByAddingAttributes([
+        font = UIFont(descriptor: font.fontDescriptor().stepperDescriptor(), size: 0)
+    }
+
+}
+
+extension UIFontDescriptor {
+
+    func stepperDescriptor() -> UIFontDescriptor {
+        return fontDescriptorByAddingAttributes([
             UIFontDescriptorFeatureSettingsAttribute: [
                 [
                     UIFontFeatureTypeIdentifierKey: kNumberSpacingType,
@@ -23,7 +28,6 @@ class CountLabel: UILabel {
                 ]
             ]
         ])
-        font = UIFont(descriptor: descriptor, size: 0.0)
     }
-    
+
 }
