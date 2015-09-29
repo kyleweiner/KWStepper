@@ -44,7 +44,7 @@ public class KWStepper: UIControl {
         }
     }
 
-    /// If YES, value wraps from min <-> max. Default = false.
+    /// If true, value wraps from min <-> max. Default = false.
     public var wraps: Bool = false
 
     /// Sends UIControlEventValueChanged, clamped to min/max. Default = 0.
