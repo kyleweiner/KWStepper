@@ -25,7 +25,7 @@ it, simply add the following lines to your Podfile:
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
+platform :ios, '9.0'
 use_frameworks!
 
 pod 'KWStepper'
@@ -48,31 +48,21 @@ var stepper: KWStepper!
 ```
 
 ```swift
-stepper = KWStepper(
-    decrementButton: decrementButton,
-    incrementButton: incrementButton)
+stepper = KWStepper(decrementButton: decrementButton, incrementButton: incrementButton)
 ```
 
 Respond to control events using the `valueChangedCallback` property.
 
 ```swift
-stepper.valueChangedCallback = {
-    self.countLabel.text = NSString(format: "%.f", self.stepper.value)
+stepper.valueChangedCallback = { [unowned self] stepper in
+	self.countLabel.text = String(format: "%.f", stepper.value)
 }
 ```
 
 Or, use the target-action pattern.
 
 ```swift
-stepper.addTarget(self,
-    action: "stepperDidChange",
-    forControlEvents: .ValueChanged)
-```
-
-```swift
-func stepperDidChange() {
-    countLabel.text = NSString(format: "%.f", stepper.value)
-}
+stepper.addTarget(self, action: "stepperDidChange", forControlEvents: .ValueChanged)
 ```
 
 ### Configuring KWStepper
@@ -99,19 +89,19 @@ Adopting `KWStepperDelegate` provides the following optional delegate methods fo
 * `optional func KWStepperMaxValueClamped()`
 * `optional func KWStepperMinValueClamped()`
 
-In the example project, `KWStepperMaxValueClamped()` and `KWStepperMinValueClamped()` are used to show a `UIAlertView` when a limit is reached and the `wraps` property is set to `false`.
-
-In [Counters•](https://itunes.apple.com/app/id722416562?mt=8), `KWStepperDidDecrement()` and `KWStepperDidIncrement()` are used to play different sounds when decrementing and incrementing the steppers.
+In the example project, `KWStepperMaxValueClamped()` and `KWStepperMinValueClamped()` are used to present a `UIAlertController` when a limit is reached and the `wraps` property is set to `false`.
 
 ### Callbacks
 
-As an alternative to the `KWStepperDelegate` protocol, KWStepper provides the following callbacks:
+KWStepper provides the following callbacks:
 
 * `valueChangedCallback`
 * `decrementCallback`
 * `incrementCallback`
 * `maxValueClampedCallback`
 * `minValueClampedCallback`
+
+In the example project, `valueChangedCallback` is used to update the count label text when the stepper value changes.
 
 ## Author
 
