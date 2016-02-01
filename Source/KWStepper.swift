@@ -14,9 +14,6 @@ import UIKit
 }
 
 public class KWStepper: UIControl {
-
-    // MARK: - Required Variables
-
     /// The decrement button used initialize the control.
     let decrementButton: UIButton
 
@@ -52,10 +49,10 @@ public class KWStepper: UIControl {
         didSet {
             if value > oldValue {
                 delegate?.KWStepperDidIncrement?()
-                incrementCallback?()
+                incrementCallback?(self)
             } else {
                 delegate?.KWStepperDidDecrement?()
-                decrementCallback?()
+                decrementCallback?(self)
             }
 
             if value < minimumValue {
@@ -65,7 +62,7 @@ public class KWStepper: UIControl {
             }
 
             sendActionsForControlEvents(.ValueChanged)
-            valueChangedCallback?()
+            valueChangedCallback?(self)
         }
     }
 
@@ -98,21 +95,21 @@ public class KWStepper: UIControl {
     }
 
     /// Executed when the value is changed.
-    public var valueChangedCallback: (() -> ())?
+    public var valueChangedCallback: (KWStepper -> Void)?
 
     /// Executed when the value is decremented.
-    public var decrementCallback: (() -> ())?
+    public var decrementCallback: (KWStepper -> Void)?
 
     /// Executed when the value is incremented.
-    public var incrementCallback: (() -> ())?
+    public var incrementCallback: (KWStepper -> Void)?
 
     /// Executed when the max value is clamped.
-    public var maxValueClampedCallback: (() -> ())?
+    public var maxValueClampedCallback: (KWStepper -> Void)?
 
     /// Executed when the min value is clamped.
-    public var minValueClampedCallback: (() -> ())?
+    public var minValueClampedCallback: (KWStepper -> Void)?
 
-    public var delegate: KWStepperDelegate? = nil
+    public weak var delegate: KWStepperDelegate?
 
     // MARK: - Private Variables
 
@@ -140,57 +137,60 @@ public class KWStepper: UIControl {
 
     public func decrementValue() {
         switch value - decrementStepValue {
-            case let x where wraps && x < minimumValue:
-                value = maximumValue
-            case let x where x >= minimumValue:
-                value = x
-            default:
-                endLongPress()
-                delegate?.KWStepperMinValueClamped?()
-                maxValueClampedCallback?()
+        case let x where wraps && x < minimumValue:
+            value = maximumValue
+        case let x where x >= minimumValue:
+            value = x
+        default:
+            endLongPress()
+            delegate?.KWStepperMinValueClamped?()
+            maxValueClampedCallback?(self)
         }
     }
 
     public func incrementValue() {
         switch value + incrementStepValue {
-            case let x where wraps && x > maximumValue:
-                value = minimumValue
-            case let x where x <= maximumValue:
-                value = x
-            default:
-                endLongPress()
-                delegate?.KWStepperMaxValueClamped?()
-                maxValueClampedCallback?()
+        case let x where wraps && x > maximumValue:
+            value = minimumValue
+        case let x where x <= maximumValue:
+            value = x
+        default:
+            endLongPress()
+            delegate?.KWStepperMinValueClamped?()
+            maxValueClampedCallback?(self)
         }
     }
 
     // MARK: - User Interaction
 
     public func didLongPress(sender: UIGestureRecognizer) {
-        if !autoRepeat {
+        guard autoRepeat else {
             return
         }
 
-        if longPressTimer == nil && sender.state == .Began {
-            longPressTimer = NSTimer.scheduledTimerWithTimeInterval(
-                autoRepeatInterval,
-                target: self,
-                selector: sender.view == incrementButton ? "incrementValue" : "decrementValue",
-                userInfo: nil,
-                repeats: true
-            )
+        switch sender.state {
+        case .Began: startLongPress(sender)
+        case .Ended, .Cancelled, .Failed: endLongPress()
+        default: break
         }
+    }
 
-        if sender.state == .Ended || sender.state == .Cancelled || sender.state == .Failed {
-            endLongPress()
-        }
+    private func startLongPress(sender: UIGestureRecognizer) {
+        guard longPressTimer == nil else { return }
+
+        longPressTimer = NSTimer.scheduledTimerWithTimeInterval(
+            autoRepeatInterval,
+            target: self,
+            selector: sender.view == incrementButton ? "incrementValue" : "decrementValue",
+            userInfo: nil,
+            repeats: true
+        )
     }
 
     private func endLongPress() {
-        if longPressTimer != nil {
-            longPressTimer?.invalidate()
-            longPressTimer = nil
-        }
+        guard let timer = longPressTimer else { return }
+        
+        timer.invalidate()
+        longPressTimer = nil
     }
-    
 }
