@@ -126,10 +126,10 @@ public class KWStepper: UIControl {
     // MARK: - Initialization
 
     /// A `UIButton` that decrements `value` when pressed.
-    let decrementButton: UIButton
+    public let decrementButton: UIButton
 
     /// A `UIButton` that increments `value` when pressed.
-    let incrementButton: UIButton
+    public let incrementButton: UIButton
 
     /**
      Initializes a `KWStepper` instance with the provided buttons.
