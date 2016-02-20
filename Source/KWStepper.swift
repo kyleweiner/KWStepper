@@ -167,7 +167,7 @@ public class KWStepper: UIControl {
         default:
             endLongPress()
             delegate?.KWStepperMinValueClamped?()
-            maxValueClampedCallback?(self)
+            minValueClampedCallback?(self)
         }
     }
 
@@ -180,7 +180,7 @@ public class KWStepper: UIControl {
             value = x
         default:
             endLongPress()
-            delegate?.KWStepperMinValueClamped?()
+            delegate?.KWStepperMaxValueClamped?()
             maxValueClampedCallback?(self)
         }
     }
