@@ -44,7 +44,11 @@ public class KWStepper: UIControl {
         }
     }
 
-    /// If true, `value` wraps from `minimumValue` <-> `maximumValue`. Default = false.
+    /**
+     If true, `value` wraps from `minimumValue` <-> `maximumValue`. Default = false.
+     The expected result of a wrapped `value` is the opposite limit–regardless of the
+     `decrementStepValue` or `incrementStepValue`. `UIStepper` exhibits the same behavior.
+    */
     public var wraps: Bool = false
 
     /// The minimum value. Must be less than `maximumValue`. Default = 0.
