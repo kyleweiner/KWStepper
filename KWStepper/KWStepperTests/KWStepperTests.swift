@@ -1,36 +1,85 @@
 //
 //  KWStepperTests.swift
-//  KWStepperTests
-//
 //  Created by Kyle Weiner on 7/11/15.
-//  Copyright (c) 2015 Kyle Weiner. All rights reserved.
 //
 
-import UIKit
 import XCTest
+import KWStepper
 
 class KWStepperTests: XCTestCase {
-    
+    var stepper: KWStepper!
+
+    // MARK: - Lifecycle
+
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+
+        stepper = KWStepper(
+            decrementButton: UIButton(),
+            incrementButton: UIButton()
+        )
     }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock() {
-            // Put the code you want to measure the time of here.
+
+    // MARK: - Decrementing / Incrementing
+
+    /// Tests decrementing / incrementing (without testing `wraps`) and
+    /// ensures that `decrementCallback` and `incrementCallback` are executed.
+    func testValue() {
+        var executedDecrementCallback = false
+        var executedIncrementCallback = false
+
+        stepper.decrementCallback = { stepper in
+            executedDecrementCallback = true
         }
+
+        stepper.incrementCallback = { stepper in
+            executedIncrementCallback = true
+        }
+
+        let initialValue = 50.0
+        stepper.value = initialValue
+
+        stepper.incrementValue()
+        XCTAssertEqual(stepper.value, initialValue + stepper.decrementStepValue)
+        XCTAssertEqual(executedIncrementCallback, true)
+
+        stepper.decrementValue()
+        XCTAssertEqual(stepper.value, initialValue)
+        XCTAssertEqual(executedDecrementCallback, true)
     }
-    
+
+    /// Tests decrementing / incrementing with `wraps` enabled.
+    func testWrapping() {
+        stepper.wraps = true
+
+        stepper.decrementValue()
+        XCTAssertEqual(stepper.value, stepper.maximumValue)
+
+        stepper.incrementValue()
+        XCTAssertEqual(stepper.value, stepper.minimumValue)
+    }
+
+    /// Tests decrementing / incrementing with `wraps` disabled and
+    /// ensures that `minValueClampedCallback` and `maxValueClampedCallback` are executed.
+    func testClamping() {
+        var executedMinValueClampedCallback = false
+        var executedMaxValueClampedCallback = false
+
+        stepper.minValueClampedCallback = { stepper in
+            executedMinValueClampedCallback = true
+        }
+
+        stepper.maxValueClampedCallback = { stepper in
+            executedMaxValueClampedCallback = true
+        }
+
+        stepper.decrementValue()
+        XCTAssertEqual(stepper.value, stepper.minimumValue)
+        XCTAssertEqual(executedMinValueClampedCallback, true)
+
+        stepper.value = stepper.maximumValue
+        stepper.incrementValue()
+        XCTAssertEqual(stepper.value, stepper.maximumValue)
+        XCTAssertEqual(executedMaxValueClampedCallback, true)
+    }
 }
