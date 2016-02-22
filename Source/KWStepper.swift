@@ -87,13 +87,7 @@ public class KWStepper: UIControl {
     /// The stepper value. Default = 0.
     public var value: Double = 0 {
         didSet {
-            if value > oldValue {
-                delegate?.KWStepperDidIncrement?()
-                incrementCallback?(self)
-            } else {
-                delegate?.KWStepperDidDecrement?()
-                decrementCallback?(self)
-            }
+            guard value != oldValue else { return }
 
             if value < minimumValue {
                 value = minimumValue
@@ -108,19 +102,19 @@ public class KWStepper: UIControl {
 
     // MARK: - Callbacks
 
-    /// Executed when `value` is changed.
+    /// Executed when `value` is changed; not when `value == oldValue`.
     public var valueChangedCallback: (KWStepper -> Void)?
 
-    /// Executed when `value` is decremented.
+    /// Executed when `value` is decremented; not when `value` is clamped or wrapped.
     public var decrementCallback: (KWStepper -> Void)?
 
-    /// Executed when `value` is incremented.
+    /// Executed when `value` is incremented; not when `value` is clamped or wrapped.
     public var incrementCallback: (KWStepper -> Void)?
 
-    /// Executed when `value` is clamped to `maximumValue`.
+    /// Executed when `value` is clamped to `maximumValue` via `incrementValue()`.
     public var maxValueClampedCallback: (KWStepper -> Void)?
 
-    /// Executed when `value` is clamped to `minimumValue`.
+    /// Executed when `value` is clamped to `minimumValue` via `decrementValue()`.
     public var minValueClampedCallback: (KWStepper -> Void)?
 
     // MARK: - Private Variables
@@ -164,10 +158,15 @@ public class KWStepper: UIControl {
     /// Decrements the stepper `value` by `decrementStepValue`.
     public func decrementValue() {
         switch value - decrementStepValue {
+        // The `value` is wrapped.
         case let x where wraps && x < minimumValue:
             value = maximumValue
+        // The `value` is decremented.
         case let x where x >= minimumValue:
             value = x
+            delegate?.KWStepperDidDecrement?()
+            decrementCallback?(self)
+        // The `value` is clamped.
         default:
             endLongPress()
             delegate?.KWStepperMinValueClamped?()
@@ -178,10 +177,15 @@ public class KWStepper: UIControl {
     /// Increments the stepper `value` by `incrementStepValue`.
     public func incrementValue() {
         switch value + incrementStepValue {
+        // The `value` is wrapped.
         case let x where wraps && x > maximumValue:
             value = minimumValue
+        // The `value` is incremented.
         case let x where x <= maximumValue:
             value = x
+            delegate?.KWStepperDidIncrement?()
+            incrementCallback?(self)
+        // The `value` is clamped.
         default:
             endLongPress()
             delegate?.KWStepperMaxValueClamped?()
