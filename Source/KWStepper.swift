@@ -8,16 +8,16 @@ import UIKit
 
 /// Optional delegate methods for tailoring the UX.
 @objc public protocol KWStepperDelegate {
-    /// Called when `value` is decremented.
+    /// Called when `value` is decremented; not when `value` is clamped or wrapped.
     optional func KWStepperDidDecrement()
 
-    /// Called when `value` is incremented.
+    /// Called when `value` is incremented; not when `value` is clamped or wrapped.
     optional func KWStepperDidIncrement()
 
-    /// Called when `value` is clamped to `maximumValue`.
+    /// Called when `value` is clamped to `maximumValue` via `incrementValue()`.
     optional func KWStepperMaxValueClamped()
 
-    /// Called when `value` is clamped to `minimumValue`.
+    /// Called when `value` is clamped to `minimumValue` via `decrementValue()`.
     optional func KWStepperMinValueClamped()
 }
 
