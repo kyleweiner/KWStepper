@@ -1,9 +1,10 @@
 # KWStepper
 
 [![Version](https://img.shields.io/cocoapods/v/KWStepper.svg?style=flat)](http://cocoapods.org/?q=kwstepper)
+[![Carthage](https://img.shields.io/badge/carthage-compatible-brightgreen.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Documentation](https://img.shields.io/cocoapods/metrics/doc-percent/KWStepper.svg?style=flat)](http://cocoadocs.org/docsets/KWStepper)
 [![Platform](https://img.shields.io/cocoapods/p/KWStepper.svg?style=flat)](http://cocoapods.org/?q=kwstepper)
 [![License](https://img.shields.io/cocoapods/l/KWStepper.svg?style=flat)](https://raw.githubusercontent.com/kyleweiner/KWStepper/master/LICENSE)
-[![Documentation](https://img.shields.io/cocoapods/metrics/doc-percent/KWStepper.svg?style=flat)](http://cocoadocs.org/docsets/KWStepper)
 
 KWStepper is a stepper control written in Swift. Unlike [UIStepper](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIStepper_Class/index.html), KWStepper allows for a fully customized UI and provides callbacks for tailoring the UX.
 
@@ -22,13 +23,21 @@ KWStepper is a stepper control written in Swift. Unlike [UIStepper](https://deve
 ### CocoaPods
 
 KWStepper is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following lines to your Podfile:
+it, simply add the following lines to your `Podfile`:
 
 ```ruby
 platform :ios, '8.0'
 use_frameworks!
 
 pod 'KWStepper'
+```
+
+### Carthage
+
+To integrate KWStepper using [Carthage](https://github.com/Carthage/Carthage), add the following line to you `Cartfile`:
+
+```ogdl
+github "kyleweiner/KWStepper"
 ```
 
 ### Manually
