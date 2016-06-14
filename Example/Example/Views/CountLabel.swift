@@ -15,7 +15,7 @@ class CountLabel: UILabel {
 
 extension UIFontDescriptor {
     func stepperDescriptor() -> UIFontDescriptor {
-        return fontDescriptorByAddingAttributes([
+        return addingAttributes([
             UIFontDescriptorFeatureSettingsAttribute: [
                 [
                     UIFontFeatureTypeIdentifierKey: kNumberSpacingType,
