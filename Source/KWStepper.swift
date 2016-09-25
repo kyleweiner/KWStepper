@@ -9,16 +9,16 @@ import UIKit
 /// Optional delegate methods for tailoring the UX.
 @objc public protocol KWStepperDelegate {
     /// Called when `value` is decremented; not when `value` is clamped or wrapped.
-    optional func KWStepperDidDecrement()
+    @objc optional func KWStepperDidDecrement()
 
     /// Called when `value` is incremented; not when `value` is clamped or wrapped.
-    optional func KWStepperDidIncrement()
+    @objc optional func KWStepperDidIncrement()
 
     /// Called when `value` is clamped to `maximumValue` via `incrementValue()`.
-    optional func KWStepperMaxValueClamped()
+    @objc optional func KWStepperMaxValueClamped()
 
     /// Called when `value` is clamped to `minimumValue` via `decrementValue()`.
-    optional func KWStepperMinValueClamped()
+    @objc optional func KWStepperMinValueClamped()
 }
 
 /// A stepper control with flexible UI and tailored UX.
@@ -35,7 +35,7 @@ public class KWStepper: UIControl {
     }
 
     /// The interval at which `autoRepeat` changes the stepper value, specified in seconds. Default = 0.10.
-    public var autoRepeatInterval: NSTimeInterval = 0.10 {
+    public var autoRepeatInterval: TimeInterval = 0.10 {
         didSet {
             if autoRepeatInterval <= 0 {
                 autoRepeatInterval = 0.10
@@ -54,28 +54,28 @@ public class KWStepper: UIControl {
     /// The minimum value. Must be less than `maximumValue`. Default = 0.
     public var minimumValue: Double = 0 {
         willSet {
-            assert(newValue < maximumValue, "\(self.dynamicType): minimumValue must be less than maximumValue.")
+            assert(newValue < maximumValue, "\(type(of: self)): minimumValue must be less than maximumValue.")
         }
     }
 
     /// The maximum value. Must be greater than `minimumValue`. Default = 100.
     public var maximumValue: Double = 100 {
         willSet {
-            assert(newValue > minimumValue, "\(self.dynamicType): maximumValue must be greater than minimumValue.")
+            assert(newValue > minimumValue, "\(type(of: self)): maximumValue must be greater than minimumValue.")
         }
     }
 
     /// The value to step when decrementing. Must be greater than 0. Default = 1.
     public var decrementStepValue: Double = 1 {
         willSet {
-            assert(newValue > 0, "\(self.dynamicType): decrementStepValue must be greater than zero.")
+            assert(newValue > 0, "\(type(of: self)): decrementStepValue must be greater than zero.")
         }
     }
 
     /// The value to step when incrementing. Must be greater than 0. Default = 1.
     public var incrementStepValue: Double = 1 {
         willSet {
-            assert(newValue > 0, "\(self.dynamicType): incrementStepValue must be greater than zero.")
+            assert(newValue > 0, "\(type(of: self)): incrementStepValue must be greater than zero.")
         }
     }
 
@@ -95,7 +95,7 @@ public class KWStepper: UIControl {
                 value = maximumValue
             }
 
-            sendActionsForControlEvents(.ValueChanged)
+            sendActions(for: .valueChanged)
             valueChangedCallback?(self)
         }
     }
@@ -103,23 +103,23 @@ public class KWStepper: UIControl {
     // MARK: - Callbacks
 
     /// Executed when `value` is changed; not when `value == oldValue`.
-    public var valueChangedCallback: (KWStepper -> Void)?
+    public var valueChangedCallback: ((KWStepper) -> Void)?
 
     /// Executed when `value` is decremented; not when `value` is clamped or wrapped.
-    public var decrementCallback: (KWStepper -> Void)?
+    public var decrementCallback: ((KWStepper) -> Void)?
 
     /// Executed when `value` is incremented; not when `value` is clamped or wrapped.
-    public var incrementCallback: (KWStepper -> Void)?
+    public var incrementCallback: ((KWStepper) -> Void)?
 
     /// Executed when `value` is clamped to `maximumValue` via `incrementValue()`.
-    public var maxValueClampedCallback: (KWStepper -> Void)?
+    public var maxValueClampedCallback: ((KWStepper) -> Void)?
 
     /// Executed when `value` is clamped to `minimumValue` via `decrementValue()`.
-    public var minValueClampedCallback: (KWStepper -> Void)?
+    public var minValueClampedCallback: ((KWStepper) -> Void)?
 
     // MARK: - Private Variables
 
-    private var longPressTimer: NSTimer?
+    private var longPressTimer: Timer?
 
     // MARK: - Initialization
 
@@ -140,10 +140,10 @@ public class KWStepper: UIControl {
         self.decrementButton = decrementButton
         self.incrementButton = incrementButton
 
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
 
-        self.decrementButton.addTarget(self, action: #selector(decrementValue), forControlEvents: .TouchUpInside)
-        self.incrementButton.addTarget(self, action: #selector(incrementValue), forControlEvents: .TouchUpInside)
+        self.decrementButton.addTarget(self, action: #selector(decrementValue), for: .touchUpInside)
+        self.incrementButton.addTarget(self, action: #selector(incrementValue), for: .touchUpInside)
 
         for button in [self.decrementButton, self.incrementButton] {
             let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(_:)))
@@ -199,23 +199,23 @@ public class KWStepper: UIControl {
     // MARK: - User Interaction
 
     /// Called while `decrementButton` or `incrementButton` are long pressed.
-    public func didLongPress(sender: UIGestureRecognizer) {
+    public func didLongPress(_ sender: UIGestureRecognizer) {
         guard autoRepeat else {
             return
         }
 
         switch sender.state {
-        case .Began: startLongPress(sender)
-        case .Ended, .Cancelled, .Failed: endLongPress()
+        case .began: startLongPress(sender)
+        case .ended, .cancelled, .failed: endLongPress()
         default: break
         }
     }
 
-    private func startLongPress(sender: UIGestureRecognizer) {
+    private func startLongPress(_ sender: UIGestureRecognizer) {
         guard longPressTimer == nil else { return }
 
-        longPressTimer = NSTimer.scheduledTimerWithTimeInterval(
-            autoRepeatInterval,
+        longPressTimer = Timer.scheduledTimer(
+            timeInterval: autoRepeatInterval,
             target: self,
             selector: sender.view == incrementButton ? #selector(incrementValue) : #selector(decrementValue),
             userInfo: nil,

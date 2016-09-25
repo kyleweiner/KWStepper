@@ -92,7 +92,7 @@ class KWStepperTests: XCTestCase {
         stepper.value = stepper.value
         XCTAssertFalse(executedCallback)
 
-        stepper.value++
+        stepper.value += 1
         XCTAssertTrue(executedCallback)
     }
 

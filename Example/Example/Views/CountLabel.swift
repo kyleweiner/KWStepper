@@ -9,13 +9,13 @@ class CountLabel: UILabel {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        font = UIFont(descriptor: font.fontDescriptor().stepperDescriptor(), size: 0)
+        font = UIFont(descriptor: font.fontDescriptor.stepperDescriptor(), size: 0)
     }
 }
 
 extension UIFontDescriptor {
     func stepperDescriptor() -> UIFontDescriptor {
-        return fontDescriptorByAddingAttributes([
+        return addingAttributes([
             UIFontDescriptorFeatureSettingsAttribute: [
                 [
                     UIFontFeatureTypeIdentifierKey: kNumberSpacingType,
