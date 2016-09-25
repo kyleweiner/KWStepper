@@ -54,28 +54,28 @@ public class KWStepper: UIControl {
     /// The minimum value. Must be less than `maximumValue`. Default = 0.
     public var minimumValue: Double = 0 {
         willSet {
-            assert(newValue < maximumValue, "\(self.dynamicType): minimumValue must be less than maximumValue.")
+            assert(newValue < maximumValue, "\(type(of: self)): minimumValue must be less than maximumValue.")
         }
     }
 
     /// The maximum value. Must be greater than `minimumValue`. Default = 100.
     public var maximumValue: Double = 100 {
         willSet {
-            assert(newValue > minimumValue, "\(self.dynamicType): maximumValue must be greater than minimumValue.")
+            assert(newValue > minimumValue, "\(type(of: self)): maximumValue must be greater than minimumValue.")
         }
     }
 
     /// The value to step when decrementing. Must be greater than 0. Default = 1.
     public var decrementStepValue: Double = 1 {
         willSet {
-            assert(newValue > 0, "\(self.dynamicType): decrementStepValue must be greater than zero.")
+            assert(newValue > 0, "\(type(of: self)): decrementStepValue must be greater than zero.")
         }
     }
 
     /// The value to step when incrementing. Must be greater than 0. Default = 1.
     public var incrementStepValue: Double = 1 {
         willSet {
-            assert(newValue > 0, "\(self.dynamicType): incrementStepValue must be greater than zero.")
+            assert(newValue > 0, "\(type(of: self)): incrementStepValue must be greater than zero.")
         }
     }
 
