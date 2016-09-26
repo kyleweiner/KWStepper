@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "KWStepper"
-  s.version      = "2.1.3"
+  s.version      = "2.1.4"
   s.summary      = "A stepper control with flexible UI and tailored UX."
   s.homepage     = "https://github.com/kyleweiner/KWStepper"
   s.license      = { :type => "MIT", :file => "LICENSE" }
