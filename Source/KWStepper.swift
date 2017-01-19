@@ -162,10 +162,10 @@ public class KWStepper: UIControl {
     public func decrementValue() {
         switch value - decrementStepValue {
         // The `value` is wrapped.
-        case let x where wraps && x < minimumValue:
+        case let x where wraps && (x <~ minimumValue):
             value = maximumValue
         // The `value` is decremented.
-        case let x where x >= minimumValue:
+        case let x where x >=~ minimumValue:
             value = x
             delegate?.KWStepperDidDecrement?()
             decrementCallback?(self)
@@ -181,10 +181,10 @@ public class KWStepper: UIControl {
     public func incrementValue() {
         switch value + incrementStepValue {
         // The `value` is wrapped.
-        case let x where wraps && x > maximumValue:
+        case let x where wraps && (x >~ maximumValue):
             value = minimumValue
         // The `value` is incremented.
-        case let x where x <= maximumValue:
+        case let x where x <=~ maximumValue:
             value = x
             delegate?.KWStepperDidIncrement?()
             incrementCallback?(self)
@@ -229,4 +229,35 @@ public class KWStepper: UIControl {
         timer.invalidate()
         longPressTimer = nil
     }
+}
+
+infix operator ==~ { precedence 130 }
+func ==~ (left: Double, right: Double) -> Bool
+{
+    return fabs(left.distance(to: right)) <= 1e-15
+}
+infix operator !=~ { precedence 130 }
+func !=~ (left: Double, right: Double) -> Bool
+{
+    return !(left ==~ right)
+}
+infix operator <~ { precedence 130 }
+func <~ (left: Double, right: Double) -> Bool
+{
+    return left.distance(to: right) > 1e-15
+}
+infix operator >~ { precedence 130 }
+func >~ (left: Double, right: Double) -> Bool
+{
+    return left.distance(to: right) < -1e-15
+}
+infix operator <=~ { precedence 130 }
+func <=~ (left: Double, right: Double) -> Bool
+{
+    return (left ==~ right) || (left <~ right)
+}
+infix operator >=~ { precedence 130 }
+func >=~ (left: Double, right: Double) -> Bool
+{
+    return (left ==~ right) || (left >~ right)
 }
