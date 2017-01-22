@@ -29,18 +29,19 @@ class ViewController: UIViewController {
         // https://github.com/kyleweiner/KWStepper#usage
         stepper = KWStepper(decrementButton: decrementButton, incrementButton: incrementButton)
 
-        // https://github.com/kyleweiner/KWStepper#configuring-kwstepper
-        stepper.maximumValue = 9
+        stepper
+            // https://github.com/kyleweiner/KWStepper#configuring-kwstepper
+            .maximumValue(10)
 
-        // Adopting KWStepperDelegate provides optional methods for tailoring the UX.
-        // https://github.com/kyleweiner/KWStepper#kwstepperdelegate
-        stepper.delegate = self
+            // Adopting KWStepperDelegate provides optional methods for tailoring the UX.
+            // https://github.com/kyleweiner/KWStepper#kwstepperdelegate
+            .delegate(self)
 
-        // Callbacks (closures) offer an alternative to the KWStepperDelegate protocol.
-        // https://github.com/kyleweiner/KWStepper#callbacks
-        stepper.valueChangedCallback = { [unowned self] stepper in
-            self.countLabel.text = String(format: "%.f", stepper.value)
-        }
+            // Callbacks (closures) offer an alternative to the KWStepperDelegate protocol.
+            // https://github.com/kyleweiner/KWStepper#callbacks
+            .valueChanged { [unowned self] stepper in
+                self.countLabel.text = String(format: "%.f", stepper.value)
+            }
     }
 
     // MARK: - Helper
@@ -75,12 +76,9 @@ extension ViewController: KWStepperDelegate {
     }
 
     private func stepperDidClampValue() {
-        let minValue = NSString(format: "%.f", stepper.minimumValue)
-        let maxValue = NSString(format: "%.f", stepper.maximumValue)
-
         let alertController = UIAlertController(
             title: "Stepper Limit Reached",
-            message: "The step value was clamped. It must be between \(minValue) and \(maxValue).",
+            message: "The step value was clamped. It must be between \(stepper.minimumValue) and \(stepper.maximumValue).",
             preferredStyle: .alert
         )
 

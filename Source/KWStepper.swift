@@ -100,26 +100,37 @@ public class KWStepper: UIControl {
         }
     }
 
+    /// Determines the rounding behavior used when incrementing or decrementing.
+    public var roundingBehavior = NSDecimalNumberHandler(
+        roundingMode: .bankers,
+        scale: 2,
+        raiseOnExactness: false,
+        raiseOnOverflow: false,
+        raiseOnUnderflow: false,
+        raiseOnDivideByZero: true)
+
     // MARK: - Callbacks
 
+    public typealias KWStepperCallback = ((KWStepper) -> Void)
+
     /// Executed when `value` is changed; not when `value == oldValue`.
-    public var valueChangedCallback: ((KWStepper) -> Void)?
+    public var valueChangedCallback: KWStepperCallback?
 
     /// Executed when `value` is decremented; not when `value` is clamped or wrapped.
-    public var decrementCallback: ((KWStepper) -> Void)?
+    public var decrementCallback: KWStepperCallback?
 
     /// Executed when `value` is incremented; not when `value` is clamped or wrapped.
-    public var incrementCallback: ((KWStepper) -> Void)?
+    public var incrementCallback: KWStepperCallback?
 
     /// Executed when `value` is clamped to `maximumValue` via `incrementValue()`.
-    public var maxValueClampedCallback: ((KWStepper) -> Void)?
+    public var maxValueClampedCallback: KWStepperCallback?
 
     /// Executed when `value` is clamped to `minimumValue` via `decrementValue()`.
-    public var minValueClampedCallback: ((KWStepper) -> Void)?
+    public var minValueClampedCallback: KWStepperCallback?
 
     // MARK: - Private Variables
 
-    private var longPressTimer: Timer?
+    fileprivate var longPressTimer: Timer?
 
     // MARK: - Initialization
 
@@ -155,49 +166,61 @@ public class KWStepper: UIControl {
     required public init?(coder aDecoder: NSCoder) {
         fatalError("KWStepper: NSCoding is not supported!")
     }
+}
 
-    // MARK: - Decrementing / Incrementing
+// MARK: - Decrementing / Incrementing
 
+extension KWStepper {
     /// Decrements the stepper `value` by `decrementStepValue`.
-    public func decrementValue() {
-        switch value - decrementStepValue {
-        // The `value` is wrapped.
-        case let x where wraps && x < minimumValue:
+    @discardableResult
+    public func decrementValue() -> Self {
+        let decrementedValue = (value - decrementStepValue).round(with: roundingBehavior)
+
+        // The `value` should wrap to `maximumValue`.
+        if wraps && decrementedValue < minimumValue {
             value = maximumValue
-        // The `value` is decremented.
-        case let x where x >= minimumValue:
-            value = x
+        // The `value` should be decremented.
+        } else if decrementedValue >= minimumValue {
+            value = decrementedValue
             delegate?.KWStepperDidDecrement?()
             decrementCallback?(self)
-        // The `value` is clamped.
-        default:
+        // The `value` should be clamped.
+        } else {
             endLongPress()
             delegate?.KWStepperMinValueClamped?()
             minValueClampedCallback?(self)
         }
+
+        return self
     }
 
     /// Increments the stepper `value` by `incrementStepValue`.
-    public func incrementValue() {
-        switch value + incrementStepValue {
-        // The `value` is wrapped.
-        case let x where wraps && x > maximumValue:
+    @discardableResult
+    public func incrementValue() -> Self {
+        let incrementedValue = (value + incrementStepValue).round(with: roundingBehavior)
+
+        // The `value` should wrap to `minimumValue`.
+        if wraps && incrementedValue > maximumValue {
             value = minimumValue
-        // The `value` is incremented.
-        case let x where x <= maximumValue:
-            value = x
+        // The `value` should be incremented.
+        } else if incrementedValue <= maximumValue {
+            value = incrementedValue
             delegate?.KWStepperDidIncrement?()
             incrementCallback?(self)
-        // The `value` is clamped.
-        default:
+        // The `value` should be clamped.
+        } else {
             endLongPress()
             delegate?.KWStepperMaxValueClamped?()
             maxValueClampedCallback?(self)
         }
+
+        return self
     }
+}
 
-    // MARK: - User Interaction
+// MARK: - User Interaction
 
+extension KWStepper {
     /// Called while `decrementButton` or `incrementButton` are long pressed.
     public func didLongPress(_ sender: UIGestureRecognizer) {
         guard autoRepeat else {
@@ -211,7 +234,7 @@ public class KWStepper: UIControl {
         }
     }
 
-    private func startLongPress(_ sender: UIGestureRecognizer) {
+    fileprivate func startLongPress(_ sender: UIGestureRecognizer) {
         guard longPressTimer == nil else { return }
 
         longPressTimer = Timer.scheduledTimer(
@@ -223,10 +246,18 @@ public class KWStepper: UIControl {
         )
     }
 
-    private func endLongPress() {
+    fileprivate func endLongPress() {
         guard let timer = longPressTimer else { return }
         
         timer.invalidate()
         longPressTimer = nil
+    }
+}
+
+// MARK: - Rounding
+
+extension Double {
+    func round(with behavior: NSDecimalNumberHandler) -> Double {
+        return NSDecimalNumber(value: self).rounding(accordingToBehavior: behavior).doubleValue
     }
 }
