@@ -26,7 +26,7 @@ public class KWStepper: UIControl {
     // MARK: - Configuring the Stepper
 
     /// If true, long pressing repeatedly alters `value`. Default = true.
-    public var autoRepeat: Bool = true {
+    public var autoRepeat = true {
         didSet {
             if autoRepeatInterval <= 0 {
                 autoRepeat = false
@@ -49,31 +49,31 @@ public class KWStepper: UIControl {
      The expected result of a wrapped `value` is the opposite limit–regardless of the
      `decrementStepValue` or `incrementStepValue`. `UIStepper` exhibits the same behavior.
     */
-    public var wraps: Bool = false
+    public var wraps = false
 
     /// The minimum value. Must be less than `maximumValue`. Default = 0.
-    public var minimumValue: Double = 0 {
+    public var minimumValue = 0.0 {
         willSet {
             assert(newValue < maximumValue, "\(type(of: self)): minimumValue must be less than maximumValue.")
         }
     }
 
     /// The maximum value. Must be greater than `minimumValue`. Default = 100.
-    public var maximumValue: Double = 100 {
+    public var maximumValue = 100.0 {
         willSet {
             assert(newValue > minimumValue, "\(type(of: self)): maximumValue must be greater than minimumValue.")
         }
     }
 
     /// The value to step when decrementing. Must be greater than 0. Default = 1.
-    public var decrementStepValue: Double = 1 {
+    public var decrementStepValue = 1.0 {
         willSet {
             assert(newValue > 0, "\(type(of: self)): decrementStepValue must be greater than zero.")
         }
     }
 
     /// The value to step when incrementing. Must be greater than 0. Default = 1.
-    public var incrementStepValue: Double = 1 {
+    public var incrementStepValue = 1.0 {
         willSet {
             assert(newValue > 0, "\(type(of: self)): incrementStepValue must be greater than zero.")
         }
@@ -85,7 +85,7 @@ public class KWStepper: UIControl {
     // MARK: - Accessing the Stepper’s Value
 
     /// The stepper value. Default = 0.
-    public var value: Double = 0 {
+    public var value = 0.0 {
         didSet {
             guard value != oldValue else { return }
 
@@ -140,7 +140,7 @@ public class KWStepper: UIControl {
         self.decrementButton = decrementButton
         self.incrementButton = incrementButton
 
-        super.init(frame: CGRect.zero)
+        super.init(frame: .zero)
 
         self.decrementButton.addTarget(self, action: #selector(decrementValue), for: .touchUpInside)
         self.incrementButton.addTarget(self, action: #selector(incrementValue), for: .touchUpInside)
