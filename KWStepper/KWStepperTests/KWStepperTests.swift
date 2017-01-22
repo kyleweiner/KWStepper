@@ -84,13 +84,6 @@ class KWStepperTests: XCTestCase {
         while !stepperWasClamped { stepper.incrementValue() }
     }
 
-    // MARK: - Chaining
-
-    func testChaining() {
-        XCTAssertEqual(stepper.value, 0)
-        XCTAssertEqual(stepper.incrementValue().decrementValue().value, 0)
-    }
-
     // MARK: - Auto Repeat
 
     /// Tests that `autoRepeat` is `false` when `autoRepeatInterval` is 0.
@@ -192,5 +185,29 @@ class KWStepperTests: XCTestCase {
 
         XCTAssertEqual(stepper.decrementValue().value, stepper.minimumValue)
         XCTAssertTrue(executedCallback)
+    }
+
+    // MARK: - Chaining
+
+    /// Tests that incrementing from 0 and then decrementing by 1 equals 0.
+    func testChaining() {
+        XCTAssertEqual(stepper.value, 0)
+        XCTAssertEqual(stepper.incrementValue().decrementValue().value, 0)
+    }
+
+    /// Tests that `stepValue(_:)` sets both `decrementStepValue` and `incrementStepValue`.
+    func testStepValue() {
+        XCTAssertEqual(stepper.value, 0)
+        XCTAssertEqual(stepper.stepValue(4).incrementStepValue, 4)
+        XCTAssertEqual(stepper.decrementStepValue, stepper.incrementStepValue)
+    }
+
+    /// Tests that `valueClamped(_:)` sets both `maxValueClampedCallback` and `minValueClampedCallback`.
+    func testValueClamped() {
+        XCTAssertNil(stepper.maxValueClampedCallback)
+        XCTAssertNil(stepper.minValueClampedCallback)
+        stepper.valueClamped { _ in }
+        XCTAssertNotNil(stepper.maxValueClampedCallback)
+        XCTAssertNotNil(stepper.minValueClampedCallback)
     }
 }

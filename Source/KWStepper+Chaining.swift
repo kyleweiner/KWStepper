@@ -110,3 +110,23 @@ extension KWStepper {
         return self
     }
 }
+
+// MARK: - Convenience
+
+extension KWStepper {
+    @discardableResult
+    public func stepValue(_ value: Double) -> Self {
+        decrementStepValue = value
+        incrementStepValue = value
+
+        return self
+    }
+
+    @discardableResult
+    public func valueClamped(_ callback: @escaping KWStepperCallback) -> Self {
+        maxValueClampedCallback = callback
+        minValueClampedCallback = callback
+
+        return self
+    }
+}
