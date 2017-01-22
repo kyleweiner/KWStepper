@@ -100,6 +100,15 @@ public class KWStepper: UIControl {
         }
     }
 
+    /// Determines the rounding behavior used when incrementing or decrementing.
+    public var roundingBehavior = NSDecimalNumberHandler(
+        roundingMode: .bankers,
+        scale: 2,
+        raiseOnExactness: false,
+        raiseOnOverflow: false,
+        raiseOnUnderflow: false,
+        raiseOnDivideByZero: true)
+
     // MARK: - Callbacks
 
     public typealias KWStepperCallback = ((KWStepper) -> Void)
@@ -163,17 +172,18 @@ public class KWStepper: UIControl {
     /// Decrements the stepper `value` by `decrementStepValue`.
     @discardableResult
     public func decrementValue() -> Self {
-        switch value - decrementStepValue {
-        // The `value` is wrapped.
-        case let x where wraps && x < minimumValue:
+        let decrementedValue = (value - decrementStepValue).round(with: roundingBehavior)
+
+        // The `value` should wrap to `maximumValue`.
+        if wraps && decrementedValue < minimumValue {
             value = maximumValue
-        // The `value` is decremented.
-        case let x where x >= minimumValue:
-            value = x
+        // The `value` should be decremented.
+        } else if decrementedValue >= minimumValue {
+            value = decrementedValue
             delegate?.KWStepperDidDecrement?()
             decrementCallback?(self)
-        // The `value` is clamped.
-        default:
+        // The `value` should be clamped.
+        } else {
             endLongPress()
             delegate?.KWStepperMinValueClamped?()
             minValueClampedCallback?(self)
@@ -185,17 +195,18 @@ public class KWStepper: UIControl {
     /// Increments the stepper `value` by `incrementStepValue`.
     @discardableResult
     public func incrementValue() -> Self {
-        switch value + incrementStepValue {
-        // The `value` is wrapped.
-        case let x where wraps && x > maximumValue:
+        let incrementedValue = (value + incrementStepValue).round(with: roundingBehavior)
+
+        // The `value` should wrap to `minimumValue`.
+        if wraps && incrementedValue > maximumValue {
             value = minimumValue
-        // The `value` is incremented.
-        case let x where x <= maximumValue:
-            value = x
+        // The `value` should be incremented.
+        } else if incrementedValue <= maximumValue {
+            value = incrementedValue
             delegate?.KWStepperDidIncrement?()
             incrementCallback?(self)
-        // The `value` is clamped.
-        default:
+        // The `value` should be clamped.
+        } else {
             endLongPress()
             delegate?.KWStepperMaxValueClamped?()
             maxValueClampedCallback?(self)
@@ -306,6 +317,13 @@ extension KWStepper {
     }
 
     @discardableResult
+    public func roundingBehavior(_ value: Double) -> Self {
+        self.roundingBehavior = roundingBehavior
+
+        return self
+    }
+
+    @discardableResult
     public func valueChanged(_ callback: KWStepperCallback?) -> Self {
         valueChangedCallback = callback
 
@@ -338,5 +356,13 @@ extension KWStepper {
         minValueClampedCallback = callback
 
         return self
+    }
+}
+
+// MARK: - Rounding
+
+extension Double {
+    func round(with behavior: NSDecimalNumberHandler) -> Double {
+        return NSDecimalNumber(value: self).rounding(accordingToBehavior: behavior).doubleValue
     }
 }
