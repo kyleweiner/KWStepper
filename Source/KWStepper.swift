@@ -102,20 +102,22 @@ public class KWStepper: UIControl {
 
     // MARK: - Callbacks
 
+    public typealias KWStepperCallback = ((KWStepper) -> Void)
+
     /// Executed when `value` is changed; not when `value == oldValue`.
-    public var valueChangedCallback: ((KWStepper) -> Void)?
+    public var valueChangedCallback: KWStepperCallback?
 
     /// Executed when `value` is decremented; not when `value` is clamped or wrapped.
-    public var decrementCallback: ((KWStepper) -> Void)?
+    public var decrementCallback: KWStepperCallback?
 
     /// Executed when `value` is incremented; not when `value` is clamped or wrapped.
-    public var incrementCallback: ((KWStepper) -> Void)?
+    public var incrementCallback: KWStepperCallback?
 
     /// Executed when `value` is clamped to `maximumValue` via `incrementValue()`.
-    public var maxValueClampedCallback: ((KWStepper) -> Void)?
+    public var maxValueClampedCallback: KWStepperCallback?
 
     /// Executed when `value` is clamped to `minimumValue` via `decrementValue()`.
-    public var minValueClampedCallback: ((KWStepper) -> Void)?
+    public var minValueClampedCallback: KWStepperCallback?
 
     // MARK: - Private Variables
 
@@ -159,7 +161,8 @@ public class KWStepper: UIControl {
     // MARK: - Decrementing / Incrementing
 
     /// Decrements the stepper `value` by `decrementStepValue`.
-    public func decrementValue() {
+    @discardableResult
+    public func decrementValue() -> Self {
         switch value - decrementStepValue {
         // The `value` is wrapped.
         case let x where wraps && x < minimumValue:
@@ -175,10 +178,13 @@ public class KWStepper: UIControl {
             delegate?.KWStepperMinValueClamped?()
             minValueClampedCallback?(self)
         }
+
+        return self
     }
 
     /// Increments the stepper `value` by `incrementStepValue`.
-    public func incrementValue() {
+    @discardableResult
+    public func incrementValue() -> Self {
         switch value + incrementStepValue {
         // The `value` is wrapped.
         case let x where wraps && x > maximumValue:
@@ -194,6 +200,8 @@ public class KWStepper: UIControl {
             delegate?.KWStepperMaxValueClamped?()
             maxValueClampedCallback?(self)
         }
+
+        return self
     }
 
     // MARK: - User Interaction
@@ -228,5 +236,107 @@ public class KWStepper: UIControl {
         
         timer.invalidate()
         longPressTimer = nil
+    }
+}
+
+// MARK: - Chaining
+
+extension KWStepper {
+    @discardableResult
+    public func autoRepeat(_ value: Bool) -> Self {
+        autoRepeat = value
+
+        return self
+    }
+
+    @discardableResult
+    public func autoRepeatInterval(_ value: TimeInterval) -> Self {
+        autoRepeatInterval = value
+
+        return self
+    }
+
+    @discardableResult
+    public func wraps(_ value: Bool) -> Self {
+        wraps = value
+
+        return self
+    }
+
+    @discardableResult
+    public func minimumValue(_ value: Double) -> Self {
+        minimumValue = value
+
+        return self
+    }
+
+    @discardableResult
+    public func maximumValue(_ value: Double) -> Self {
+        maximumValue = value
+
+        return self
+    }
+
+    @discardableResult
+    public func decrementStepValue(_ value: Double) -> Self {
+        decrementStepValue = value
+
+        return self
+    }
+
+    @discardableResult
+    public func incrementStepValue(_ value: Double) -> Self {
+        incrementStepValue = value
+
+        return self
+    }
+
+    @discardableResult
+    public func delegate(_ value: KWStepperDelegate?) -> Self {
+        delegate = value
+
+        return self
+    }
+
+    @discardableResult
+    public func value(_ value: Double) -> Self {
+        self.value = value
+
+        return self
+    }
+
+    @discardableResult
+    public func valueChanged(_ callback: KWStepperCallback?) -> Self {
+        valueChangedCallback = callback
+
+        return self
+    }
+
+    @discardableResult
+    public func didDecrement(_ callback: KWStepperCallback?) -> Self {
+        decrementCallback = callback
+
+        return self
+    }
+
+    @discardableResult
+    public func didIncrement(_ callback: KWStepperCallback?) -> Self {
+        incrementCallback = callback
+
+        return self
+    }
+
+    @discardableResult
+    public func maxValueClamped(_ callback: KWStepperCallback?) -> Self {
+        maxValueClampedCallback = callback
+
+        return self
+    }
+
+    @discardableResult
+    public func minValueClamped(_ callback: KWStepperCallback?) -> Self {
+        minValueClampedCallback = callback
+
+        return self
     }
 }
