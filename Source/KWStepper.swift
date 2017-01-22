@@ -130,7 +130,7 @@ public class KWStepper: UIControl {
 
     // MARK: - Private Variables
 
-    private var longPressTimer: Timer?
+    fileprivate var longPressTimer: Timer?
 
     // MARK: - Initialization
 
@@ -166,9 +166,11 @@ public class KWStepper: UIControl {
     required public init?(coder aDecoder: NSCoder) {
         fatalError("KWStepper: NSCoding is not supported!")
     }
+}
 
-    // MARK: - Decrementing / Incrementing
+// MARK: - Decrementing / Incrementing
 
+extension KWStepper {
     /// Decrements the stepper `value` by `decrementStepValue`.
     @discardableResult
     public func decrementValue() -> Self {
@@ -214,9 +216,11 @@ public class KWStepper: UIControl {
 
         return self
     }
+}
 
-    // MARK: - User Interaction
+// MARK: - User Interaction
 
+extension KWStepper {
     /// Called while `decrementButton` or `incrementButton` are long pressed.
     public func didLongPress(_ sender: UIGestureRecognizer) {
         guard autoRepeat else {
@@ -230,7 +234,7 @@ public class KWStepper: UIControl {
         }
     }
 
-    private func startLongPress(_ sender: UIGestureRecognizer) {
+    fileprivate func startLongPress(_ sender: UIGestureRecognizer) {
         guard longPressTimer == nil else { return }
 
         longPressTimer = Timer.scheduledTimer(
@@ -242,120 +246,11 @@ public class KWStepper: UIControl {
         )
     }
 
-    private func endLongPress() {
+    fileprivate func endLongPress() {
         guard let timer = longPressTimer else { return }
         
         timer.invalidate()
         longPressTimer = nil
-    }
-}
-
-// MARK: - Chaining
-
-extension KWStepper {
-    @discardableResult
-    public func autoRepeat(_ value: Bool) -> Self {
-        autoRepeat = value
-
-        return self
-    }
-
-    @discardableResult
-    public func autoRepeatInterval(_ value: TimeInterval) -> Self {
-        autoRepeatInterval = value
-
-        return self
-    }
-
-    @discardableResult
-    public func wraps(_ value: Bool) -> Self {
-        wraps = value
-
-        return self
-    }
-
-    @discardableResult
-    public func minimumValue(_ value: Double) -> Self {
-        minimumValue = value
-
-        return self
-    }
-
-    @discardableResult
-    public func maximumValue(_ value: Double) -> Self {
-        maximumValue = value
-
-        return self
-    }
-
-    @discardableResult
-    public func decrementStepValue(_ value: Double) -> Self {
-        decrementStepValue = value
-
-        return self
-    }
-
-    @discardableResult
-    public func incrementStepValue(_ value: Double) -> Self {
-        incrementStepValue = value
-
-        return self
-    }
-
-    @discardableResult
-    public func delegate(_ value: KWStepperDelegate?) -> Self {
-        delegate = value
-
-        return self
-    }
-
-    @discardableResult
-    public func value(_ value: Double) -> Self {
-        self.value = value
-
-        return self
-    }
-
-    @discardableResult
-    public func roundingBehavior(_ value: Double) -> Self {
-        self.roundingBehavior = roundingBehavior
-
-        return self
-    }
-
-    @discardableResult
-    public func valueChanged(_ callback: KWStepperCallback?) -> Self {
-        valueChangedCallback = callback
-
-        return self
-    }
-
-    @discardableResult
-    public func didDecrement(_ callback: KWStepperCallback?) -> Self {
-        decrementCallback = callback
-
-        return self
-    }
-
-    @discardableResult
-    public func didIncrement(_ callback: KWStepperCallback?) -> Self {
-        incrementCallback = callback
-
-        return self
-    }
-
-    @discardableResult
-    public func maxValueClamped(_ callback: KWStepperCallback?) -> Self {
-        maxValueClampedCallback = callback
-
-        return self
-    }
-
-    @discardableResult
-    public func minValueClamped(_ callback: KWStepperCallback?) -> Self {
-        minValueClampedCallback = callback
-
-        return self
     }
 }
 
