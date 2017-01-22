@@ -61,6 +61,29 @@ class KWStepperTests: XCTestCase {
         XCTAssertEqual(stepper.decrementValue().value, stepper.minimumValue)
     }
 
+    // MARK: - Double Arithmetic
+
+    /// Tests decrementing and incrementing with IEEE 754 floating-point numbers.
+    func testDoubleArithmetic() {
+        stepper.value(4.8).decrementStepValue(0.4).decrementValue()
+        XCTAssertEqual(stepper.value, 4.4)
+
+        stepper.value(1.1).incrementStepValue(0.1).incrementValue()
+        XCTAssertEqual(stepper.value, 1.2)
+    }
+
+    // Tests that incrementing from 0 by 0.01 should eventually clamp at 1.2.
+    func testDoubleArithmeticByClamping() {
+        var stepperWasClamped = false
+
+        stepper.value(0).maximumValue(1.2).incrementStepValue(0.01).maxValueClamped { stepper in
+            stepperWasClamped = true
+            XCTAssertEqual(stepper.value, stepper.maximumValue)
+        }
+
+        while !stepperWasClamped { stepper.incrementValue() }
+    }
+
     // MARK: - Chaining
 
     func testChaining() {
