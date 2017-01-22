@@ -31,7 +31,7 @@ class ViewController: UIViewController {
 
         stepper
             // https://github.com/kyleweiner/KWStepper#configuring-kwstepper
-            .maximumValue(9)
+            .maximumValue(10)
 
             // Adopting KWStepperDelegate provides optional methods for tailoring the UX.
             // https://github.com/kyleweiner/KWStepper#kwstepperdelegate
@@ -40,7 +40,7 @@ class ViewController: UIViewController {
             // Callbacks (closures) offer an alternative to the KWStepperDelegate protocol.
             // https://github.com/kyleweiner/KWStepper#callbacks
             .valueChanged { [unowned self] stepper in
-                self.countLabel.text = String(stepper.value)
+                self.countLabel.text = String(format: "%.f", stepper.value)
             }
     }
 
@@ -76,12 +76,9 @@ extension ViewController: KWStepperDelegate {
     }
 
     private func stepperDidClampValue() {
-        let minValue = NSString(format: "%.f", stepper.minimumValue)
-        let maxValue = NSString(format: "%.f", stepper.maximumValue)
-
         let alertController = UIAlertController(
             title: "Stepper Limit Reached",
-            message: "The step value was clamped. It must be between \(minValue) and \(maxValue).",
+            message: "The step value was clamped. It must be between \(stepper.minimumValue) and \(stepper.maximumValue).",
             preferredStyle: .alert
         )
 
