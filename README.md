@@ -12,13 +12,14 @@ KWStepper is a stepper control written in Swift. Unlike [UIStepper](https://deve
 <img src="screenshots.png" alt="KWStepper Screenshot">
 </p>
 
- KWStepper was initially created in Objective-C for [Addo Label's](http://addolabel.com/) [Counters•](https://itunes.apple.com/app/id722416562?mt=8) and is now available in Swift for you to enjoy :)
+KWStepper was initially created in Objective-C for [Addo Label's](http://addolabel.com/) [Counters•](http://addolabel.com/counters) and is now available in Swift for you to enjoy :grin:
 
 ## Features
 
 * Allows for a fully customized UI.
 * Provides properties for setting different decrement and increment steps.
 * Offers optional callbacks for responding to control events and tailoring the UX.
+* Supports method chaining for easier configuration and event handling.
 
 ## Installation
 
@@ -65,8 +66,8 @@ stepper = KWStepper(decrementButton: decrementButton, incrementButton: increment
 Respond to control events using the `valueChangedCallback` property.
 
 ```swift
-stepper.valueChangedCallback = { [unowned self] stepper in
-	self.countLabel.text = String(format: "%.f", stepper.value)
+stepper.valueChangedCallback = { stepper in
+	self.countLabel.text = String(stepper.value)
 }
 ```
 
@@ -91,6 +92,20 @@ stepper.incrementStepValue = 1
 stepper.decrementStepValue = 1
 ```
 
+Method chaining is also supported:
+
+```swift
+stepper
+    .wraps(true)
+    .maximumValue(10)
+    .stepValue(2)
+    .valueChanged { stepper in
+        // ...
+    }
+```
+
+If necessary, the rounding behavior for incrementing and decrementing may be modified via `roundingBehavior`.
+
 ### KWStepperDelegate
 
 Adopting `KWStepperDelegate` provides the following optional delegate methods for tailoring the UX.
@@ -99,8 +114,6 @@ Adopting `KWStepperDelegate` provides the following optional delegate methods fo
 * `optional func KWStepperDidIncrement()`
 * `optional func KWStepperMaxValueClamped()`
 * `optional func KWStepperMinValueClamped()`
-
-In the example project, `KWStepperMaxValueClamped()` and `KWStepperMinValueClamped()` are used to present a `UIAlertController` when a limit is reached and the `wraps` property is set to `false`.
 
 ### Callbacks
 
@@ -112,11 +125,27 @@ KWStepper provides the following callbacks:
 * `maxValueClampedCallback`
 * `minValueClampedCallback`
 
-In the example project, `valueChangedCallback` is used to update the count label text when the stepper value changes.
+Method chaining is supported for callbacks too:
+
+```swift
+stepper
+    .valueChanged { _ in }
+    .didDecrement { _ in }
+    .didIncrement { _ in }
+    .maxValueClamped { _ in }
+    .minValueClamped { _ in }
+
+// `maxValueClampedCallback` and `minValueClampedCallback` may be set simultaneously.
+stepper.valueClamped { stepper in
+    // ...
+}
+```
+
+In the example project, `valueChanged(_:)` is used to update the count label text when the stepper value changes. `valueClamped(:_)` is used to present a `UIAlertController` when a limit is reached and the `wraps` property is set to `false`.
 
 ## Author
 
-KWStepper was written by Kyle Weiner.
+KWStepper was written by Kyle Weiner and [contributors](https://github.com/kyleweiner/KWStepper/contributors).
 
 ## License
 
