@@ -7,6 +7,7 @@
 import UIKit
 
 /// Optional delegate methods for tailoring the UX.
+
 @objc public protocol KWStepperDelegate {
     /// Called when `value` is decremented; not when `value` is clamped or wrapped.
     @objc optional func KWStepperDidDecrement()
@@ -22,6 +23,7 @@ import UIKit
 }
 
 /// A stepper control with flexible UI and tailored UX.
+
 public class KWStepper: UIControl {
     // MARK: - Configuring the Stepper
 
@@ -79,6 +81,15 @@ public class KWStepper: UIControl {
         }
     }
 
+    /// Determines the rounding behavior used when incrementing or decrementing.
+    public var roundingBehavior = NSDecimalNumberHandler(
+        roundingMode: .bankers,
+        scale: 2,
+        raiseOnExactness: false,
+        raiseOnOverflow: false,
+        raiseOnUnderflow: false,
+        raiseOnDivideByZero: true)
+
     /// The delegate for the control.
     public weak var delegate: KWStepperDelegate?
 
@@ -99,15 +110,6 @@ public class KWStepper: UIControl {
             valueChangedCallback?(self)
         }
     }
-
-    /// Determines the rounding behavior used when incrementing or decrementing.
-    public var roundingBehavior = NSDecimalNumberHandler(
-        roundingMode: .bankers,
-        scale: 2,
-        raiseOnExactness: false,
-        raiseOnOverflow: false,
-        raiseOnUnderflow: false,
-        raiseOnDivideByZero: true)
 
     // MARK: - Callbacks
 
@@ -162,15 +164,13 @@ public class KWStepper: UIControl {
         }
     }
 
-    /// `KWStepper` does not support `NSCoding`.
+    /// :nodoc:
     required public init?(coder aDecoder: NSCoder) {
         fatalError("KWStepper: NSCoding is not supported!")
     }
-}
 
-// MARK: - Decrementing / Incrementing
+    // MARK: - Decrementing & Incrementing
 
-extension KWStepper {
     /// Decrements the stepper `value` by `decrementStepValue`.
     @discardableResult
     public func decrementValue() -> Self {
@@ -222,7 +222,7 @@ extension KWStepper {
 
 extension KWStepper {
     /// Called while `decrementButton` or `incrementButton` are long pressed.
-    public func didLongPress(_ sender: UIGestureRecognizer) {
+    @objc fileprivate func didLongPress(_ sender: UIGestureRecognizer) {
         guard autoRepeat else {
             return
         }
