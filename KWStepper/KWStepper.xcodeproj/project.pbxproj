@@ -11,6 +11,7 @@
 		27B01E251B512C93008DFFD8 /* KWStepper.h in Headers */ = {isa = PBXBuildFile; fileRef = 27B01E241B512C93008DFFD8 /* KWStepper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		27B01E2B1B512C93008DFFD8 /* KWStepper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B01E1F1B512C93008DFFD8 /* KWStepper.framework */; };
 		27B01E321B512C93008DFFD8 /* KWStepperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B01E311B512C93008DFFD8 /* KWStepperTests.swift */; };
+		27F802201E34A81F007E0D3E /* KWStepper+Chaining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F8021F1E34A81F007E0D3E /* KWStepper+Chaining.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +32,7 @@
 		27B01E2A1B512C93008DFFD8 /* KWStepperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KWStepperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		27B01E301B512C93008DFFD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27B01E311B512C93008DFFD8 /* KWStepperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KWStepperTests.swift; sourceTree = "<group>"; };
+		27F8021F1E34A81F007E0D3E /* KWStepper+Chaining.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KWStepper+Chaining.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			isa = PBXGroup;
 			children = (
 				279340891B513B690071D87B /* KWStepper.swift */,
+				27F8021F1E34A81F007E0D3E /* KWStepper+Chaining.swift */,
 			);
 			name = Source;
 			path = ../../Source;
@@ -171,7 +174,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Kyle Weiner";
 				TargetAttributes = {
 					27B01E1E1B512C93008DFFD8 = {
@@ -224,6 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27F802201E34A81F007E0D3E /* KWStepper+Chaining.swift in Sources */,
 				2793408A1B513B690071D87B /* KWStepper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -260,8 +264,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -310,8 +316,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -343,6 +351,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -363,6 +372,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;

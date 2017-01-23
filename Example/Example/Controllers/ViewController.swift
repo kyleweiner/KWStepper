@@ -22,35 +22,45 @@ class ViewController: UIViewController {
         configureStepper()
         configureSwitches()
     }
+}
 
-    // MARK: - Configuration
+// MARK: - Stepper Configuration & Event Handling
 
+extension ViewController {
     func configureStepper() {
         // https://github.com/kyleweiner/KWStepper#usage
         stepper = KWStepper(decrementButton: decrementButton, incrementButton: incrementButton)
 
         // https://github.com/kyleweiner/KWStepper#configuring-kwstepper
-        stepper.maximumValue = 9
-
-        // Adopting KWStepperDelegate provides optional methods for tailoring the UX.
-        // https://github.com/kyleweiner/KWStepper#kwstepperdelegate
-        stepper.delegate = self
-
-        // Callbacks (closures) offer an alternative to the KWStepperDelegate protocol.
-        // https://github.com/kyleweiner/KWStepper#callbacks
-        stepper.valueChangedCallback = { [unowned self] stepper in
-            self.countLabel.text = String(format: "%.f", stepper.value)
-        }
+        stepper
+            .maximumValue(10)
+            .valueChanged { [unowned self] stepper in
+                self.countLabel.text = String(format: "%.f", stepper.value)
+            }
+            .valueClamped { [unowned self] stepper in
+                self.presentValueClampedAlert()
+            }
     }
 
-    // MARK: - Helper
+    // Presents a `UIAlertController` when the stepper's value is clamped.
+    fileprivate func presentValueClampedAlert() {
+        let alertController = UIAlertController(
+            title: "Stepper Limit Reached",
+            message: "The step value was clamped. It must be between \(stepper.minimumValue) and \(stepper.maximumValue).",
+            preferredStyle: .alert
+        ).addAlertAction(withTitle: "OK", handler: nil)
 
-    private func configureSwitches() {
+        present(alertController, animated: true, completion: nil)
+    }
+}
+
+// MARK: - UISwitch Configuration & Event Handling
+
+extension ViewController {
+    fileprivate func configureSwitches() {
         wrapsSwitch.isOn = stepper.wraps
         autoRepeatSwitch.isOn = stepper.autoRepeat
     }
-
-    // MARK: - UISwitch Events
 
     @IBAction func switchDidChange(_ sender: UISwitch) {
         if sender === wrapsSwitch {
@@ -60,33 +70,5 @@ class ViewController: UIViewController {
         if sender === autoRepeatSwitch {
             stepper.autoRepeat = autoRepeatSwitch.isOn
         }
-    }
-}
-
-// MARK: - KWStepperDelegate
-
-extension ViewController: KWStepperDelegate {
-    func KWStepperMaxValueClamped() {
-        stepperDidClampValue()
-    }
-
-    func KWStepperMinValueClamped() {
-        stepperDidClampValue()
-    }
-
-    private func stepperDidClampValue() {
-        let minValue = NSString(format: "%.f", stepper.minimumValue)
-        let maxValue = NSString(format: "%.f", stepper.maximumValue)
-
-        let alertController = UIAlertController(
-            title: "Stepper Limit Reached",
-            message: "The step value was clamped. It must be between \(minValue) and \(maxValue).",
-            preferredStyle: .alert
-        )
-
-        let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alertController.addAction(alertAction)
-
-        present(alertController, animated: true, completion: nil)
     }
 }

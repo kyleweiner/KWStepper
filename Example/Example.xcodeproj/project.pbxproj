@@ -16,6 +16,7 @@
 		27B01E4A1B512CD2008DFFD8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B01E491B512CD2008DFFD8 /* AppDelegate.swift */; };
 		27B01E511B512CD2008DFFD8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27B01E501B512CD2008DFFD8 /* Images.xcassets */; };
 		27B01E601B512CD2008DFFD8 /* ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B01E5F1B512CD2008DFFD8 /* ExampleTests.swift */; };
+		27F8022A1E357E38007E0D3E /* UIAlertController+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F802291E357E38007E0D3E /* UIAlertController+Helper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		27B01E591B512CD2008DFFD8 /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		27B01E5E1B512CD2008DFFD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27B01E5F1B512CD2008DFFD8 /* ExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleTests.swift; sourceTree = "<group>"; };
+		27F802291E357E38007E0D3E /* UIAlertController+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Helper.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				270B4D471C5FE47A00D8E60D /* Main.storyboard */,
 				270E23911B51313B0045B702 /* Controllers */,
 				270E23971B5131600045B702 /* Views */,
+				27F802271E357E08007E0D3E /* Extensions */,
 				27B01E471B512CD2008DFFD8 /* Supporting Files */,
 			);
 			path = Example;
@@ -178,6 +181,14 @@
 				27B01E5E1B512CD2008DFFD8 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		27F802271E357E08007E0D3E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				27F802291E357E38007E0D3E /* UIAlertController+Helper.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,7 +238,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Kyle Weiner";
 				TargetAttributes = {
 					27B01E431B512CD2008DFFD8 = {
@@ -310,6 +321,7 @@
 			files = (
 				270E23991B5131600045B702 /* CountLabel.swift in Sources */,
 				270E23931B51313B0045B702 /* ViewController.swift in Sources */,
+				27F8022A1E357E38007E0D3E /* UIAlertController+Helper.swift in Sources */,
 				27B01E4A1B512CD2008DFFD8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -370,8 +382,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -417,8 +431,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
