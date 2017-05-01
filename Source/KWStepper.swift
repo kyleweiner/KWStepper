@@ -128,6 +128,9 @@ public class KWStepper: UIControl {
             
             sendActions(for: .valueChanged)
             valueChangedCallback?(self)
+            
+            //call press timer on increment
+            startPressTimer()
         }
     }
     
@@ -218,8 +221,6 @@ public class KWStepper: UIControl {
             minValueClampedCallback?(self)
         }
         
-        //call press timer on decrement
-        startPressTimer()
         return self
     }
     
@@ -243,8 +244,7 @@ public class KWStepper: UIControl {
             delegate?.KWStepperMaxValueClamped?()
             maxValueClampedCallback?(self)
         }
-        //call press timer on increment
-        startPressTimer()
+        
         return self
     }
     
