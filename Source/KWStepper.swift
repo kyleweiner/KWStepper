@@ -128,9 +128,6 @@ public class KWStepper: UIControl {
             
             sendActions(for: .valueChanged)
             valueChangedCallback?(self)
-            
-            //call press timer on increment
-            startPressTimer()
         }
     }
     
@@ -209,11 +206,13 @@ public class KWStepper: UIControl {
         // The `value` should wrap to `maximumValue`.
         if wraps && decrementedValue < minimumValue {
             value = maximumValue
+            startPressTimer()
             // The `value` should be decremented.
         } else if decrementedValue >= minimumValue {
             value = decrementedValue
             delegate?.KWStepperDidDecrement?()
             decrementCallback?(self)
+            startPressTimer()
             // The `value` should be clamped.
         } else {
             endLongPress()
@@ -233,11 +232,13 @@ public class KWStepper: UIControl {
         // The `value` should wrap to `minimumValue`.
         if wraps && incrementedValue > maximumValue {
             value = minimumValue
+            startPressTimer()
             // The `value` should be incremented.
         } else if incrementedValue <= maximumValue {
             value = incrementedValue
             delegate?.KWStepperDidIncrement?()
             incrementCallback?(self)
+            startPressTimer()
             // The `value` should be clamped.
         } else {
             endLongPress()
