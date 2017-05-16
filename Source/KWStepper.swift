@@ -151,7 +151,7 @@ public class KWStepper: UIControl {
     public var minValueClampedCallback: KWStepperCallback?
     
     /// Executed when period of press ends
-    public var pressRepeatCallback: ((KWStepper,Bool) -> Void)?
+    public var pressRepeatCallback: KWStepperCallback?
     
     
     // MARK: - Private Variables
@@ -206,13 +206,13 @@ public class KWStepper: UIControl {
         // The `value` should wrap to `maximumValue`.
         if wraps && decrementedValue < minimumValue {
             value = maximumValue
-            startPressTimer(isIncrementChange: false)
+            startPressTimer()
             // The `value` should be decremented.
         } else if decrementedValue >= minimumValue {
             value = decrementedValue
             delegate?.KWStepperDidDecrement?()
             decrementCallback?(self)
-            startPressTimer(isIncrementChange: false)
+            startPressTimer()
             // The `value` should be clamped.
         } else {
             endLongPress()
@@ -232,13 +232,13 @@ public class KWStepper: UIControl {
         // The `value` should wrap to `minimumValue`.
         if wraps && incrementedValue > maximumValue {
             value = minimumValue
-            startPressTimer(isIncrementChange: true)
+            startPressTimer()
             // The `value` should be incremented.
         } else if incrementedValue <= maximumValue {
             value = incrementedValue
             delegate?.KWStepperDidIncrement?()
             incrementCallback?(self)
-            startPressTimer(isIncrementChange: true)
+            startPressTimer()
             // The `value` should be clamped.
         } else {
             endLongPress()
@@ -250,22 +250,22 @@ public class KWStepper: UIControl {
     }
     
     // start timer to get the stepper after 'autoRepeatInterval'
-    func startPressTimer(isIncrementChange:Bool){
+    func startPressTimer(){
         if pressRepeat {
             pressTimer = Timer.scheduledTimer(
                 timeInterval: pressRepeatInterval,
                 target: self,
                 selector:  #selector(pressTimerAction),
-                userInfo: isIncrementChange,
-                repeats: true
+                userInfo: nil,
+                repeats: false
             )
         }
     }
     
     func pressTimerAction(){
-        pressRepeatCallback?(self,pressTimer?.userInfo as? Bool == true)
         pressTimer?.invalidate()
         pressTimer = nil
+        pressRepeatCallback?(self)
     }
     
 }

@@ -151,7 +151,7 @@ extension KWStepper {
     
     /// Sets the stepper's `pressRepeatCallback`.
     @discardableResult
-    public func pressRepeat(_ callback: @escaping ((KWStepper,Bool) -> Void)) -> Self {
+    public func pressRepeat(_ callback: @escaping KWStepperCallback) -> Self {
         pressRepeatCallback = callback
         
         return self
