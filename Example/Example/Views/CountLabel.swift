@@ -16,14 +16,14 @@ class CountLabel: UILabel {
 extension UIFontDescriptor {
     func stepperDescriptor() -> UIFontDescriptor {
         return addingAttributes([
-            UIFontDescriptorFeatureSettingsAttribute: [
+            UIFontDescriptor.AttributeName.featureSettings: [
                 [
-                    UIFontFeatureTypeIdentifierKey: kNumberSpacingType,
-                    UIFontFeatureSelectorIdentifierKey: kProportionalNumbersSelector
+                    UIFontDescriptor.FeatureKey.featureIdentifier: kNumberSpacingType,
+                    UIFontDescriptor.FeatureKey.typeIdentifier: kProportionalNumbersSelector
                 ],
                 [
-                    UIFontFeatureTypeIdentifierKey: kCharacterAlternativesType,
-                    UIFontFeatureSelectorIdentifierKey: 1
+                    UIFontDescriptor.FeatureKey.featureIdentifier: kCharacterAlternativesType,
+                    UIFontDescriptor.FeatureKey.typeIdentifier: 1
                 ]
             ]
         ])

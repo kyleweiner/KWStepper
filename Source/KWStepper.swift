@@ -172,7 +172,7 @@ public class KWStepper: UIControl {
     // MARK: - Decrementing & Incrementing
 
     /// Decrements the stepper `value` by `decrementStepValue`.
-    @discardableResult
+    @objc @discardableResult
     public func decrementValue() -> Self {
         let decrementedValue = (value - decrementStepValue).round(with: roundingBehavior)
 
@@ -195,7 +195,7 @@ public class KWStepper: UIControl {
     }
 
     /// Increments the stepper `value` by `incrementStepValue`.
-    @discardableResult
+    @objc @discardableResult
     public func incrementValue() -> Self {
         let incrementedValue = (value + incrementStepValue).round(with: roundingBehavior)
 
