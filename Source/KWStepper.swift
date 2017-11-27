@@ -20,6 +20,9 @@ import UIKit
 
     /// Called when `value` is clamped to `minimumValue` via `decrementValue()`.
     @objc optional func KWStepperMinValueClamped()
+
+    /// Called when a long press gesture ends.
+    @objc optional func KWStepperDidEndLongPress()
 }
 
 /// A stepper control with flexible UI and tailored UX.
@@ -129,6 +132,9 @@ public class KWStepper: UIControl {
 
     /// Executed when `value` is clamped to `minimumValue` via `decrementValue()`.
     public var minValueClampedCallback: KWStepperCallback?
+
+    /// Executed when a long press gesture ends.
+    public var longPressEndedCallback: KWStepperCallback?
 
     // MARK: - Private Variables
 
@@ -251,6 +257,9 @@ extension KWStepper {
         
         timer.invalidate()
         longPressTimer = nil
+
+        delegate?.KWStepperDidEndLongPress?()
+        longPressEndedCallback?(self)
     }
 }
 
