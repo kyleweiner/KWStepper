@@ -114,6 +114,7 @@ Adopting `KWStepperDelegate` provides the following optional delegate methods fo
 * `optional func KWStepperDidIncrement()`
 * `optional func KWStepperMaxValueClamped()`
 * `optional func KWStepperMinValueClamped()`
+* `optional func KWStepperDidEndLongPress()`
 
 ### Callbacks
 
@@ -124,6 +125,7 @@ KWStepper provides the following callbacks:
 * `incrementCallback`
 * `maxValueClampedCallback`
 * `minValueClampedCallback`
+* `longPressEndedCallback`
 
 Method chaining is supported for callbacks too:
 
@@ -134,6 +136,7 @@ stepper
     .didIncrement { _ in }
     .maxValueClamped { _ in }
     .minValueClamped { _ in }
+    .longPressEnded { _ in }
 
 // `maxValueClampedCallback` and `minValueClampedCallback` may be set simultaneously.
 stepper.valueClamped { stepper in
