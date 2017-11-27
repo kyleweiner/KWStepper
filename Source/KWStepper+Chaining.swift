@@ -129,6 +129,14 @@ extension KWStepper {
         return self
     }
 
+    /// Sets the stepper's `longPressEndedCallback`.
+    @discardableResult
+    public func longPressEnded(_ callback: KWStepperCallback?) -> Self {
+        longPressEndedCallback = callback
+
+        return self
+    }
+
     // MARK: - Convenience Methods
 
     /// Sets the stepper's `decrementStepValue` and `incrementStepValue`.
