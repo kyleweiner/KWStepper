@@ -6,7 +6,7 @@
 import UIKit
 
 extension UIAlertController {
-    func addAlertAction(withTitle title: String?, style: UIAlertActionStyle = .default, handler: ((UIAlertAction) -> Void)?) -> Self {
+    func addAlertAction(withTitle title: String?, style: UIAlertAction.Style = .default, handler: ((UIAlertAction) -> Void)?) -> Self {
         addAction(UIAlertAction(title: title, style: style, handler: handler))
 
         return self
