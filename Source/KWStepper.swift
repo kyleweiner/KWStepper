@@ -27,7 +27,7 @@ import UIKit
 
 /// A stepper control with flexible UI and tailored UX.
 
-public class KWStepper: UIControl {
+open class KWStepper: UIControl {
     // MARK: - Configuring the Stepper
 
     /// If true, long pressing repeatedly alters `value`. Default = true.
