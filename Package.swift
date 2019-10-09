@@ -10,6 +10,6 @@ let package = Package(
         .library(name: "KWStepper", targets: ["KWStepper"]),
     ],
     targets: [
-        .target(name: "KWStepper", path: "Sources")
+        .target(name: "KWStepper", path: "Source")
     ]
 )

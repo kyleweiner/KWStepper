@@ -3,6 +3,7 @@
 //  Created by Kyle Weiner on 1/22/17.
 //  https://github.com/kyleweiner/KWStepper
 //
+import Foundation
 
 extension KWStepper {
     // MARK: - Configuration Methods
