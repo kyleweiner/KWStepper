@@ -12,3 +12,4 @@ let package = Package(
     targets: [
         .target(name: "KWStepper", path: "Sources")
     ]
+)
