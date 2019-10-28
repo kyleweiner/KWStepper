@@ -138,7 +138,7 @@ open class KWStepper: UIControl {
 
     // MARK: - Private Variables
 
-    fileprivate var longPressTimer: Timer?
+    private var longPressTimer: Timer?
 
     // MARK: - Initialization
 
@@ -228,7 +228,7 @@ open class KWStepper: UIControl {
 
 extension KWStepper {
     /// Called while `decrementButton` or `incrementButton` are long pressed.
-    @objc fileprivate func didLongPress(_ sender: UIGestureRecognizer) {
+    @objc private func didLongPress(_ sender: UIGestureRecognizer) {
         guard autoRepeat else {
             return
         }
@@ -240,7 +240,7 @@ extension KWStepper {
         }
     }
 
-    fileprivate func startLongPress(_ sender: UIGestureRecognizer) {
+    private func startLongPress(_ sender: UIGestureRecognizer) {
         guard longPressTimer == nil else { return }
 
         longPressTimer = Timer.scheduledTimer(
@@ -252,7 +252,7 @@ extension KWStepper {
         )
     }
 
-    fileprivate func endLongPress() {
+    private func endLongPress() {
         guard let timer = longPressTimer else { return }
         
         timer.invalidate()
@@ -267,6 +267,6 @@ extension KWStepper {
 
 extension Double {
     func round(with behavior: NSDecimalNumberHandler) -> Double {
-        return NSDecimalNumber(value: self).rounding(accordingToBehavior: behavior).doubleValue
+        NSDecimalNumber(value: self).rounding(accordingToBehavior: behavior).doubleValue
     }
 }

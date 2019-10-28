@@ -43,7 +43,7 @@ extension ViewController {
     }
 
     // Presents a `UIAlertController` when the stepper's value is clamped.
-    fileprivate func presentValueClampedAlert() {
+    private func presentValueClampedAlert() {
         let alertController = UIAlertController(
             title: "Stepper Limit Reached",
             message: "The step value was clamped. It must be between \(stepper.minimumValue) and \(stepper.maximumValue).",
@@ -57,7 +57,7 @@ extension ViewController {
 // MARK: - UISwitch Configuration & Event Handling
 
 extension ViewController {
-    fileprivate func configureSwitches() {
+    private func configureSwitches() {
         wrapsSwitch.isOn = stepper.wraps
         autoRepeatSwitch.isOn = stepper.autoRepeat
     }
