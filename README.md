@@ -43,7 +43,7 @@ github "kyleweiner/KWStepper"
 
 ### Swift Package Manager
 
-To add KWStepper to your Xcode project via [Swift Package Manager](https://swift.org/package-manager/), select `File → Swift Packages → Add Package Dependency…` and enter the URL for this this repository.
+To add KWStepper to your Xcode project via [Swift Package Manager](https://swift.org/package-manager/), select `File → Swift Packages → Add Package Dependency…` and enter the URL for this repository.
 
 ### Manually
 
