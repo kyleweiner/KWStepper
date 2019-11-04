@@ -4,6 +4,8 @@
 //  https://github.com/kyleweiner/KWStepper
 //
 
+import Foundation
+
 public extension KWStepper {
     // MARK: - Configuration Methods
 
