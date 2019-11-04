@@ -2,7 +2,7 @@
 
 [![Version](https://img.shields.io/cocoapods/v/KWStepper.svg?style=flat)](http://cocoapods.org/?q=kwstepper)
 [![Carthage](https://img.shields.io/badge/carthage-compatible-brightgreen.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![Documentation](https://img.shields.io/cocoapods/metrics/doc-percent/KWStepper.svg?style=flat)](http://cocoadocs.org/docsets/KWStepper)
+[![Documentation](https://img.shields.io/badge/docs-100%25-FF8200?style=flat)](http://cocoadocs.org/docsets/KWStepper)
 [![Platform](https://img.shields.io/cocoapods/p/KWStepper.svg?style=flat)](http://cocoapods.org/?q=kwstepper)
 [![License](https://img.shields.io/cocoapods/l/KWStepper.svg?style=flat)](https://raw.githubusercontent.com/kyleweiner/KWStepper/master/LICENSE)
 
@@ -29,9 +29,7 @@ KWStepper is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following lines to your `Podfile`:
 
 ```ruby
-platform :ios, '8.0'
 use_frameworks!
-
 pod 'KWStepper'
 ```
 
@@ -42,6 +40,10 @@ To integrate KWStepper using [Carthage](https://github.com/Carthage/Carthage), a
 ```ogdl
 github "kyleweiner/KWStepper"
 ```
+
+### Swift Package Manager
+
+To add KWStepper to your Xcode project via [Swift Package Manager](https://swift.org/package-manager/), select `File → Swift Packages → Add Package Dependency…` and enter the URL for this this repository.
 
 ### Manually
 
